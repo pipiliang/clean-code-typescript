@@ -5,16 +5,16 @@
 
 ## 目录
   1. [简介](#简介)
-  2. [变量](#variables)
-  3. [函数](#functions)
-  4. [对象与数据结构](#objects-and-data-structures)
-  5. [类](#classes)
-  6. [SOLID原则](#solid)
-  7. [测试](#testing)
-  8. [并发](#concurrency)
-  9. [错误处理](#error-handling)
-  10. [格式化](#formatting)
-  11. [注释](#comments)
+  2. [变量](#变量)
+  3. [函数](#函数)
+  4. [对象与数据结构](#对象和数据结构)
+  5. [类](#类)
+  6. [SOLID原则](#SOLID原则)
+  7. [测试](#测试)
+  8. [并发](#并发)
+  9. [错误处理](#错误处理)
+  10. [格式化](#格式化)
+  11. [注释](#注释)
 
 ## 简介
 
@@ -62,13 +62,13 @@ improvement. Beat up the code instead!
 
 **[⬆ 回到顶部](#目录)**
 
-## Variables
+## 变量
 
-### Use meaningful variable names
+### 使用有意义的变量名
 
 Distinguish names in such a way that the reader knows what the differences offer.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -80,7 +80,7 @@ function between<T>(a1: T, a2: T, a3: T) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -92,7 +92,7 @@ function between<T>(value: T, left: T, right: T) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Use pronounceable variable names
 
@@ -130,7 +130,7 @@ class Customer {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Use the same vocabulary for the same type of variable
 
@@ -330,7 +330,7 @@ function loadPages(count: number = 10) {
 
 **[⬆ back to top](#table-of-contents)**
 
-## Functions
+## 函数
 
 ### Function arguments (2 or fewer ideally)
 
@@ -1028,7 +1028,7 @@ class MyArray<T> extends Array<T> {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Favor functional programming over imperative programming
 
@@ -1118,7 +1118,7 @@ const totalOutput = contributions
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Encapsulate conditionals
 
@@ -1152,7 +1152,7 @@ if (canActivateService(subscription, account)) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid negative conditionals
 
@@ -1192,7 +1192,7 @@ if (!isEmailUsed(node)) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid conditionals
 
@@ -1284,7 +1284,7 @@ class Cessna extends Airplane {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid type checking
 
@@ -1328,7 +1328,7 @@ function travelToTexas(vehicle: Vehicle) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't over-optimize
 
@@ -1362,7 +1362,7 @@ for (let i = 0; i < list.length; i++) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Remove dead code
 
@@ -1408,9 +1408,9 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Objects and Data Structures
+## 对象和数据结构
 
 ### Use getters and setters
 
@@ -1492,7 +1492,7 @@ account.balance = 100;
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Make objects have private/protected members
 
@@ -1556,7 +1556,7 @@ class Circle {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Prefer readonly properties
 
@@ -1596,9 +1596,9 @@ interface Config {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Classes
+## 类
 
 ### Classes should be small
 
@@ -1664,7 +1664,7 @@ class Dashboard {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### High cohesion and low coupling
 
@@ -1786,7 +1786,7 @@ class UserNotifier {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Prefer composition over inheritance
 
@@ -1888,7 +1888,7 @@ class EmployeeTaxData {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Use method chaining
 
@@ -2012,9 +2012,9 @@ const query = new QueryBuilder()
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## SOLID
+## SOLID原则
 
 ### Single Responsibility Principle (SRP)
 
@@ -2092,9 +2092,9 @@ class UserSettings {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-### Open/Closed Principle (OCP)
+### 开闭原则(Open/Closed Principle)
 
 As stated by Bertrand Meyer, "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification." What does that mean though? This principle basically states that you should allow users to add new functionalities without changing existing code.
 
@@ -2230,7 +2230,7 @@ class HttpRequester {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Liskov Substitution Principle (LSP)
 
@@ -2404,7 +2404,7 @@ renderLargeShapes(shapes);
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Interface Segregation Principle (ISP)
 
@@ -2534,9 +2534,9 @@ class EconomicPrinter implements IPrinter {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-### Dependency Inversion Principle (DIP)
+### 依赖倒置原则(Dependency Inversion Principle)
 
 This principle states two essential things:
 
@@ -2674,9 +2674,9 @@ await report = await reader.read('report.json');
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Testing
+## 测试
 
 Testing is more important than shipping. If you have no tests or an inadequate amount, then every time you ship code you won't be sure that you didn't break anything.
 
@@ -2694,7 +2694,7 @@ There's no excuse to not write tests. There are plenty of good JS test framework
 
 3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### F.I.R.S.T. rules
 
@@ -2710,7 +2710,7 @@ Clean tests should follow the rules:
 
 * **Timely** unit tests should be written before the production code. If you write tests after the production code, you might find writing tests too hard.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Single concept per test
 
@@ -2794,7 +2794,7 @@ describe('AwesomeDate', () => {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### The name of the test should reveal it's intention
 
@@ -2844,9 +2844,9 @@ describe('Calendar', () => {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Concurrency
+## 并发
 
 ### Prefer promises vs callbacks
 
@@ -2954,7 +2954,7 @@ Promises supports a few patterns that could be useful in some cases:
 
 `Promise.all` is especially useful when there is a need to run tasks in parallel. `Promise.race` makes it easier to implement things like timeouts for promises.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Async/Await are even cleaner than Promises
 
@@ -3024,9 +3024,9 @@ try {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Error Handling
+## 错误处理
 
 Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function
 
@@ -3130,7 +3130,7 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 
 For the detailed explanation of this idea refer to the [original post](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't ignore caught errors
 
@@ -3182,7 +3182,7 @@ try {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't ignore rejected promises
 
@@ -3244,9 +3244,9 @@ try {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Formatting
+## 格式化
 
 Formatting is subjective. Like many rules herein, there is no hard and fast rule that you must follow. The main point is *DO NOT ARGUE* over formatting. There are tons of tools to automate this. Use one! It's a waste of time and money for engineers to argue over formatting. The general rule to follow is *keep consistent formatting rules*.  
 
@@ -3320,7 +3320,7 @@ Prefer using `PascalCase` for class, interface, type and namespace names.
 
 Prefer using `camelCase` for variables, functions and class members.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Function callers and callees should be close
 
@@ -3452,7 +3452,7 @@ review.review();
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### type vs. interface
 
@@ -3530,13 +3530,12 @@ class Square implements Shape {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-## Comments
+## 注释
 
 The use of a comments is an indication of failure to express without them. Code should be the only source of truth.
 
-  
 
 > Don’t comment bad code—rewrite it.  
 
@@ -3566,7 +3565,7 @@ if (isSubscriptionActive) { /* ... */ }
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't leave commented out code in your codebase
 
@@ -3604,7 +3603,7 @@ class User {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't have journal comments
 
@@ -3646,7 +3645,7 @@ function combine(a:number, b:number): number {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid positional markers
 
@@ -3745,4 +3744,4 @@ class Client {
 ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
