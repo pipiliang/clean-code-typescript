@@ -18,9 +18,7 @@
 
 ## 简介
 
-![Humorous image of software quality estimation as a count of how many expletives
-
-you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
+![Humorous image of software quality estimation as a count of how many expletives you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
 Software engineering principles, from Robert C. Martin's book
 
@@ -94,11 +92,11 @@ function between<T>(value: T, left: T, right: T) {
 
 **[⬆ 回到顶部](#目录)**
 
-### Use pronounceable variable names
+### 使用可读的(pronounceable)变量名
 
 If you can’t pronounce it, you can’t discuss it without sounding like an idiot.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -114,7 +112,7 @@ class DtaRcrd102 {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -132,9 +130,10 @@ class Customer {
 
 **[⬆ 回到顶部](#目录)**
 
-### Use the same vocabulary for the same type of variable
+### 相同类型变量名使用相同词汇
+Use the same vocabulary for the same type of variable
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -146,7 +145,7 @@ function getUserData(): User;
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -156,11 +155,11 @@ function getUser(): User;
 
 **[⬆ 回到顶部](#目录)**
 
-### Use searchable names
+### 使用可搜索的名字(searchable)
 
 We will read more code than we will ever write. It's important that the code we do write is readable and searchable. By not naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) can help identify unnamed constants.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -170,7 +169,7 @@ setTimeout(restart, 86400000);
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -184,9 +183,9 @@ setTimeout(restart, MILLISECONDS_IN_A_DAY);
 
 **[⬆ 回到顶部](#目录)**
 
-### Use explanatory variables
+### 使用可解释的变量
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -200,7 +199,7 @@ for (const keyValue of users) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -248,11 +247,11 @@ const transaction = charge(user, subscription);
 
 **[⬆ 回到顶部](#目录)**
 
-### Don't add unneeded context
+### 不要添加不需要的上下文
 
 If your class/object name tells you something, don't repeat that in your variable name.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -274,7 +273,7 @@ function print(car: Car): void {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -302,7 +301,7 @@ function print(car: Car): void {
 
 Default arguments are often cleaner than short circuiting.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -316,7 +315,7 @@ function loadPages(count: number) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -356,7 +355,7 @@ This has a few advantages:
 
 3. TypeScript warns you about unused properties, which would be impossible without destructuring.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -370,7 +369,7 @@ createMenu('Foo', 'Bar', 'Baz', true);
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -426,7 +425,7 @@ createMenu({
 
 This is by far the most important rule in software engineering. When functions do more than one thing, they are harder to compose, test, and reason about. When you can isolate a function to just one action, they can be refactored easily and your code will read much cleaner. If you take nothing else away from this guide other than this, you'll be ahead of many developers.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -448,7 +447,7 @@ function emailClients(clients: Client) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -470,9 +469,10 @@ function isActiveClient(client: Client) {
 
 **[⬆ 回到顶部](#目录)**
 
-### Function names should say what they do
+### 函数要名副其实
+Function names should say what they do
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -490,7 +490,7 @@ addToDate(date, 1);
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -512,7 +512,7 @@ addMonthToDate(date, 1);
 
 When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -552,7 +552,7 @@ function parseCode(code:string) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -626,7 +626,7 @@ Oftentimes you have duplicate code because you have two or more slightly differe
 
 Getting the abstraction right is critical, that's why you should follow the [SOLID](#solid) principles. Bad abstractions can be worse than duplicate code, so be careful! Having said this, if you can make a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself updating multiple places anytime you want to change one thing.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -684,7 +684,7 @@ function showManagerList(managers: Manager[]) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -754,7 +754,7 @@ You should be critical about code duplication. Sometimes there is a tradeoff bet
 
 ### Set default objects with Object.assign or destructuring
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -788,7 +788,7 @@ createMenu(menuConfig);
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -838,7 +838,7 @@ Flags tell your user that this function does more than one thing.
 
 Functions should do one thing. Split out your functions if they are following different code paths based on a boolean.
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -858,7 +858,7 @@ function createFile(name:string, temp:boolean) {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
