@@ -130,8 +130,7 @@ class Customer {
 
 **[⬆ 回到顶部](#目录)**
 
-### 相同类型变量名使用相同词汇
-Use the same vocabulary for the same type of variable
+### 变量名和类型名相同
 
 **反例:**
 
@@ -155,7 +154,7 @@ function getUser(): User;
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用可搜索的名字(searchable)
+### 使用可搜索的名字
 
 We will read more code than we will ever write. It's important that the code we do write is readable and searchable. By not naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) can help identify unnamed constants.
 
@@ -221,7 +220,7 @@ Explicit is better than implicit.
 
 *Clarity is king.*
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -233,7 +232,7 @@ const t = charge(u, s);
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -248,8 +247,7 @@ const transaction = charge(user, subscription);
 **[⬆ 回到顶部](#目录)**
 
 ### 不要添加不需要的上下文
-
-If your class/object name tells you something, don't repeat that in your variable name.
+如果您的类名或对象名体现了某种含义，在变量名中不要再重复。
 
 **反例:**
 
@@ -297,9 +295,8 @@ function print(car: Car): void {
 
 **[⬆ 回到顶部](#目录)**
 
-### Use default arguments instead of short circuiting or conditionals
-
-Default arguments are often cleaner than short circuiting.
+### 使用默认参数而不是短路或条件
+默认参数通常比短路更干净。
 
 **反例:**
 
@@ -331,7 +328,7 @@ function loadPages(count: number = 10) {
 
 ## 函数
 
-### Function arguments (2 or fewer ideally)
+### 函数参数 (理想情况不超过2个)
 
 Limiting the amount of function parameters is incredibly important because it makes testing your function easier.
 
@@ -392,8 +389,7 @@ createMenu({
 });
 
 ```
-
-You can further improve readability by using TypeScript's [type aliases](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)
+通过 TypeScript's [类型别名](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)，您可以进一步提高可读性。
 
 ```ts
 
