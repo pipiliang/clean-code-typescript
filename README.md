@@ -1,7 +1,7 @@
 # Clean Code Typescript
 将 Clean Code 概念应用到 TypeScript.
 
->本文是对[clean-code-typescript]的翻译以及总结，更适合中国程序员学习交流。
+>本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简，让更适合中国程序员阅读、学习和交流。
 
 ## 目录
   1. [简介](#简介)
@@ -154,7 +154,7 @@ function getUser(): User;
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Use searchable names
 
@@ -182,7 +182,7 @@ setTimeout(restart, MILLISECONDS_IN_A_DAY);
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Use explanatory variables
 
@@ -214,7 +214,7 @@ for (const [id, user] of users) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid Mental Mapping
 
@@ -246,7 +246,7 @@ const transaction = charge(user, subscription);
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't add unneeded context
 
@@ -296,7 +296,7 @@ function print(car: Car): void {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Use default arguments instead of short circuiting or conditionals
 
@@ -328,7 +328,7 @@ function loadPages(count: number = 10) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ## 函数
 
@@ -420,7 +420,7 @@ createMenu({
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Functions should do one thing
 
@@ -468,7 +468,7 @@ function isActiveClient(client: Client) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Function names should say what they do
 
@@ -506,7 +506,7 @@ addMonthToDate(date, 1);
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Functions should only be one level of abstraction
 
@@ -608,9 +608,9 @@ function parse(tokens: Token[]): SyntaxTree {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
-### Remove duplicate code
+### 删除重复代码
 
 Do your absolute best to avoid duplicate code.
 
@@ -750,7 +750,7 @@ function showEmployeeList(employee: Developer | Manager) {
 
 You should be critical about code duplication. Sometimes there is a tradeoff between duplicated code and increased complexity by introducing unnecessary abstraction. When two implementations from two different modules look similar but live in different domains, duplication might be acceptable and preferred over extracting the common code. The extracted common code in this case introduces an indirect dependency between the two modules.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Set default objects with Object.assign or destructuring
 
@@ -830,7 +830,7 @@ createMenu({ body: 'Bar' });
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't use flags as function parameters
 
@@ -876,7 +876,7 @@ function createTempFile(name:string) {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid Side Effects (part 1)
 
@@ -936,7 +936,7 @@ console.log(name);
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Avoid Side Effects (part 2)
 
@@ -976,7 +976,7 @@ function addItemToCart(cart: CartItem[], item:Item):CartItem[] {
 
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ### Don't write to global functions
 
@@ -1120,7 +1120,7 @@ const totalOutput = contributions
 
 **[⬆ 回到顶部](#目录)**
 
-### Encapsulate conditionals
+### Encapsulate conditionals 封装条件
 
 **Bad:**
 
