@@ -2233,7 +2233,7 @@ class HttpRequester {
 
 **[⬆ 回到顶部](#目录)**
 
-### Liskov Substitution Principle (LSP)
+### 李氏替换原则 (LSP)
 
 This is a scary term for a very simple concept. It's formally defined as "If S is a subtype of T, then objects of type T may be replaced with objects of type S (i.e., objects of type S may substitute objects of type T) without altering any of the desirable properties of that program (correctness, task performed, etc.)." That's an even scarier definition.  
 
@@ -2407,7 +2407,7 @@ renderLargeShapes(shapes);
 
 **[⬆ 回到顶部](#目录)**
 
-### Interface Segregation Principle (ISP)
+### 接口隔离原则 (ISP)
 
 ISP states that "Clients should not be forced to depend upon interfaces that they do not use.". This principle is very much related to the Single Responsibility Principle.
 
@@ -2537,7 +2537,7 @@ class EconomicPrinter implements IPrinter {
 
 **[⬆ 回到顶部](#目录)**
 
-### 依赖倒置原则(Dependency Inversion Principle)
+### 依赖反转原则(Dependency Inversion Principle)
 
 This principle states two essential things:
 
@@ -2687,14 +2687,14 @@ is how you achieve very high confidence and developer peace of mind. This means 
 
 There's no excuse to not write tests. There are plenty of good JS test frameworks with typings support for TypeScript, so find one that your team prefers. When you find one that works for your team, then aim to always write tests for every new feature/module you introduce. If your preferred method is Test Driven Development (TDD), that is great, but the main point is to just make sure you are reaching your coverage goals before launching any feature, or refactoring an existing one.  
 
-### The three laws of TDD
+### TDD三法则
 1. You are not allowed to write any production code unless it is to make a failing unit test pass.
 2. You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
 3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
 
 **[⬆ 回到顶部](#目录)**
 
-### F.I.R.S.T. rules
+### F.I.R.S.T.规则
 
 Clean tests should follow the rules:
 
@@ -3452,13 +3452,13 @@ review.review();
 
 **[⬆ 回到顶部](#目录)**
 
-### type vs. interface
+### 类型 vs 接口
 
 Use type when you might need a union or intersection. Use interface when you want `extends` or `implements`. There is no strict rule however, use the one that works for you.  
 
-Refer to this [explanation](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) about the differences between `type` and `interface` in TypeScript.
+参考这个关于Typescript中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -3490,7 +3490,7 @@ type Shape {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -3539,11 +3539,12 @@ The use of a comments is an indication of failure to express without them. Code 
 
 > — *Brian W. Kernighan and P. J. Plaugher*
 
-### Prefer self explanatory code instead of comments
+### 代码应该自解释而不是注释
 
-Comments are an apology, not a requirement. Good code mostly documents itself.
+Comments are an apology, not a requirement. 
+好代码即文档。
 
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -3553,7 +3554,7 @@ if (subscription.endDate > Date.now) {  }
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
@@ -3565,9 +3566,8 @@ if (isSubscriptionActive) { /* ... */ }
 
 **[⬆ 回到顶部](#目录)**
 
-### Don't leave commented out code in your codebase
-
-Version control exists for a reason. Leave old code in your history.
+### 不要将注释掉的代码留在代码库中
+版本控制存在的一个理由，就是让旧代码成为历史。
 
 **反例:**
 
@@ -3603,9 +3603,9 @@ class User {
 
 **[⬆ 回到顶部](#目录)**
 
-### Don't have journal comments
+### 不要日记式注释
 
-记住，使用版本控制！There's no need for dead code, commented code, and especially journal comments. Use git log to get history!
+记住，使用版本控制！不需要保留无用代码(dead code)、注释代码，尤其是日记式注释，使用git log来获取历史。
 
 **反例:**
 
@@ -3645,13 +3645,12 @@ function combine(a:number, b:number): number {
 
 **[⬆ 回到顶部](#目录)**
 
-### Avoid positional markers
+### 避免位置标记
+它们常常扰乱代码。让代码结构化，函数和变量有合适的缩进和格式。
 
-They usually just add noise. Let the functions and variable names along with the proper indentation and formatting give the visual structure to your code.  
+作为一个可选项，你可以使用支持代码折叠的IDE (看下 Visual Studio Code [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
 
-Optionally you can use IDE support for code folding (see Visual Studio Code [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
-
-**Bad:**
+**反例:**
 
 ```ts
 
@@ -3705,7 +3704,7 @@ class Client {
 
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 
