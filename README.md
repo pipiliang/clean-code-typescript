@@ -3,31 +3,20 @@
 
 >本文是对[clean-code-typescript]的翻译以及总结，更适合中国程序员学习交流。
 
-## Table of Contents
+## 目录
+  1. [简介](#简介)
+  2. [变量](#variables)
+  3. [函数](#functions)
+  4. [对象与数据结构](#objects-and-data-structures)
+  5. [类](#classes)
+  6. [SOLID原则](#solid)
+  7. [测试](#testing)
+  8. [并发](#concurrency)
+  9. [错误处理](#error-handling)
+  10. [格式化](#formatting)
+  11. [注释](#comments)
 
-  1. [Introduction](#introduction)
-
-  2. [Variables](#variables)
-
-  3. [Functions](#functions)
-
-  4. [Objects and Data Structures](#objects-and-data-structures)
-
-  5. [Classes](#classes)
-
-  6. [SOLID](#solid)
-
-  7. [Testing](#testing)
-
-  8. [Concurrency](#concurrency)
-
-  9. [Error Handling](#error-handling)
-
-  10. [Formatting](#formatting)
-
-  11. [Comments](#comments)
-
-## Introduction
+## 简介
 
 ![Humorous image of software quality estimation as a count of how many expletives
 
@@ -71,7 +60,7 @@ we review it with our peers. Don't beat yourself up for first drafts that need
 
 improvement. Beat up the code instead!
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ 回到顶部](#目录)**
 
 ## Variables
 
