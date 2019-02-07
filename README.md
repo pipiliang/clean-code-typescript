@@ -1,7 +1,5 @@
-# Clean Code Typescript
-将 Clean Code 概念应用到 TypeScript.
-
->本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简，让更适合中国程序员阅读、学习和交流。
+# TypeScript代码整洁之道
+本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简，让国内程序员可更快速阅读和学习。
 
 ## 目录
   1. [简介](#简介)
@@ -20,43 +18,14 @@
 
 ![Humorous image of software quality estimation as a count of how many expletives you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
-Software engineering principles, from Robert C. Martin's book
+这不是TypeScript编码规范，是将Robert C. Martin的[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)应用到TypeScript上，指导如何使用TypeScript编写[易读、可重用和可重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
+并不是每一个原则都必须严格遵守，得到普遍认同的原则就更少了。这些虽然只是指导，没有其他内容，但却是*Clean Code*作者多年经验的总结。
 
-adapted for TypeScript. This is not a style guide. It's a guide to producing
+软件工程技术已经有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队的JavaScript代码质量的试金石。
 
-[readable, reusable, and refactorable](https://github.com/ryanmcdermott/3rs-of-software-architecture) software in TypeScript.
+还有件事：理解这些原则不会立即让您成为更好的程序员，也不意味着工作多年不会犯错。每一段代码都是从不完美开始的，通过走查，我们把不完美的地方剔除，就像湿粘土最终成形一样，不要因为需要不断改进而自责!
 
-Not every principle herein has to be strictly followed, and even fewer will be
-
-universally agreed upon. These are guidelines and nothing more, but they are
-
-ones codified over many years of collective experience by the authors of
-
-*Clean Code*.
-
-Our craft of software engineering is just a bit over 50 years old, and we are
-
-still learning a lot. When software architecture is as old as architecture
-
-itself, maybe then we will have harder rules to follow. For now, let these
-
-guidelines serve as a touchstone by which to assess the quality of the
-
-JavaScript code that you and your team produce.
-
-One more thing: knowing these won't immediately make you a better software
-
-developer, and working with them for many years doesn't mean you won't make
-
-mistakes. Every piece of code starts as a first draft, like wet clay getting
-
-shaped into its final form. Finally, we chisel away the imperfections when
-
-we review it with our peers. Don't beat yourself up for first drafts that need
-
-improvement. Beat up the code instead!
 
 **[⬆ 回到顶部](#目录)**
 
@@ -64,7 +33,7 @@ improvement. Beat up the code instead!
 
 ### 使用有意义的变量名
 
-Distinguish names in such a way that the reader knows what the differences offer.
+做有意义的区分，让读者更容易理解变量的不同。
 
 **反例:**
 
@@ -92,9 +61,9 @@ function between<T>(value: T, left: T, right: T) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用可读的(pronounceable)变量名
+### 使用读得出来的变量名
 
-If you can’t pronounce it, you can’t discuss it without sounding like an idiot.
+如果你不能读出它，你在讨论它时听起来就会像个白痴。
 
 **反例:**
 
@@ -130,7 +99,7 @@ class Customer {
 
 **[⬆ 回到顶部](#目录)**
 
-### 变量名和类型名相同
+### 对功能类似的变量名采用统一的命名风格
 
 **反例:**
 
@@ -154,9 +123,9 @@ function getUser(): User;
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用可搜索的名字
+### 使用可查找的变量名
 
-We will read more code than we will ever write. It's important that the code we do write is readable and searchable. By not naming variables that end up being meaningful for understanding our program, we hurt our readers. Make your names searchable. Tools like [TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) can help identify unnamed constants.
+我们读代码比写的要多。写代码要是可读和可查找的，这很重要。 不取一些对理解程序有用的变量名，那就会坑阅读代码的人。要让命名可查找，像[TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) 这样的工具可以帮助识别未命名的常量。
 
 **反例:**
 
@@ -182,7 +151,7 @@ setTimeout(restart, MILLISECONDS_IN_A_DAY);
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用可解释的变量
+### 使用解释性变量
 
 **反例:**
 
@@ -214,11 +183,9 @@ for (const [id, user] of users) {
 
 **[⬆ 回到顶部](#目录)**
 
-### Avoid Mental Mapping
+### 避免思维映射，避免缩写
 
-Explicit is better than implicit.  
-
-*Clarity is king.*
+不要让人去猜测或想象变量的含义，*明确是王道.*
 
 **反例:**
 
@@ -246,8 +213,9 @@ const transaction = charge(user, subscription);
 
 **[⬆ 回到顶部](#目录)**
 
-### 不要添加不需要的上下文
-如果您的类名或对象名体现了某种含义，在变量名中不要再重复。
+### 避免重复描述
+
+如果您的类名或对象名已经表达了某中信息，在内部变量名中不要再重复。
 
 **反例:**
 
@@ -295,7 +263,8 @@ function print(car: Car): void {
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用默认参数而不是短路或条件
+### 使用默认参数，而不是短路或条件
+
 默认参数通常比短路更干净。
 
 **反例:**
@@ -325,6 +294,8 @@ function loadPages(count: number = 10) {
 ```
 
 **[⬆ 回到顶部](#目录)**
+
+
 
 ## 函数
 
@@ -2091,7 +2062,7 @@ class UserSettings {
 
 **[⬆ 回到顶部](#目录)**
 
-### 开闭原则
+### 开闭原则 (OCP)
 
 As stated by Bertrand Meyer, "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification." What does that mean though? This principle basically states that you should allow users to add new functionalities without changing existing code.
 
@@ -2229,7 +2200,7 @@ class HttpRequester {
 
 **[⬆ 回到顶部](#目录)**
 
-### 李氏替换原则 (LSP)
+### 里氏替换原则 (LSP)
 
 This is a scary term for a very simple concept. It's formally defined as "If S is a subtype of T, then objects of type T may be replaced with objects of type S (i.e., objects of type S may substitute objects of type T) without altering any of the desirable properties of that program (correctness, task performed, etc.)." That's an even scarier definition.  
 
