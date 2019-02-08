@@ -299,11 +299,13 @@ function loadPages(count: number = 10) {
 
 ## 函数
 
-### 函数参数 (理想情况不超过2个)
+### 参数越少越好 (理想情况不超过2个)
 
 Limiting the amount of function parameters is incredibly important because it makes testing your function easier.
 
 Having more than three leads to a combinatorial explosion where you have to test tons of different cases with each separate argument.  
+
+限制函数参数数量非常重要，因为它使测试函数更加容易。超过三个会导致组合爆炸，你必须用每一个独立的参数来测试众多的不同情况。
 
 One or two arguments is the ideal case, and three should be avoided if possible. Anything more than that should be consolidated.
 
@@ -311,15 +313,20 @@ Usually, if you have more than two arguments then your function is trying to do 
 
 In cases where it's not, most of the time a higher-level object will suffice as an argument.  
 
+一个两个参数是理想情况，如果可能的话，应该避免三个参数。除此之外的任何事情都应该合并。通常，如果您有两个以上的参数，那么您的函数就会做得太多。如果不是这样的话，大多数时候一个更高层次的对象就足够作为一个参数了。
+
 Consider using object literals if you are finding yourself needing a lot of arguments.  
 
 To make it obvious what properties the function expects, you can use the [destructuring](https://basarat.gitbooks.io/typescript/docs/destructuring.html) syntax.
 
 This has a few advantages:
 
-1. When someone looks at the function signature, it's immediately clear what properties are being used.
+如果您发现自己需要很多参数，请考虑使用对象。为了使函数期望的属性更加明显，可以使用析构函数语法。这有几个优点：
 
-2. Destructuring also clones the specified primitive values of the argument object passed into the function. This can help prevent side effects. Note: objects and arrays that are destructured from the argument object are NOT cloned.
+1. When someone looks at the function signature, it's immediately clear what properties are being used.
+1. 当有人查看函数签名时，会立即清楚使用了哪些属性。
+
+2. Destructuring also clones the specified primitive values of the argument object passed into the function. This can help prevent side effects. Note: objects and arrays that are destructured from the argument object are NOT cloned
 
 3. TypeScript warns you about unused properties, which would be impossible without destructuring.
 
@@ -388,7 +395,7 @@ createMenu({
 
 **[⬆ 回到顶部](#目录)**
 
-### Functions should do one thing
+### 只做一件事
 
 This is by far the most important rule in software engineering. When functions do more than one thing, they are harder to compose, test, and reason about. When you can isolate a function to just one action, they can be refactored easily and your code will read much cleaner. If you take nothing else away from this guide other than this, you'll be ahead of many developers.
 
@@ -436,8 +443,8 @@ function isActiveClient(client: Client) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 函数要名副其实
-Function names should say what they do
+### 名副其实
+从函数名就可看出函数的功能。
 
 **反例:**
 
@@ -475,7 +482,7 @@ addMonthToDate(date, 1);
 
 **[⬆ 回到顶部](#目录)**
 
-### Functions should only be one level of abstraction
+### 函数完成的功能需在一个抽象层次上
 
 When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.
 
@@ -799,8 +806,8 @@ createMenu({ body: 'Bar' });
 
 **[⬆ 回到顶部](#目录)**
 
-### 函数参数不要使用标识
-标识表明这个函数做了不止一件事，函数只应做一件事。
+### 不要使用Flag参数
+标识表明这个函数做了不止一件事。
 
 Split out your functions if they are following different code paths based on a boolean.
 
@@ -844,7 +851,7 @@ function createTempFile(name:string) {
 
 **[⬆ 回到顶部](#目录)**
 
-### Avoid Side Effects (part 1)
+### 不要有副作用1
 
 A function produces a side effect if it does anything other than take a value in and return another value or values.
 
@@ -904,7 +911,7 @@ console.log(name);
 
 **[⬆ 回到顶部](#目录)**
 
-### Avoid Side Effects (part 2)
+### 不要有副作用2
 
 In JavaScript, primitives are passed by value and objects/arrays are passed by reference. In the case of objects and arrays, if your function makes a change in a shopping cart array, for example, by adding an item to purchase, then any other function that uses that cart array will be affected by this addition. That may be great, however it can be bad too. Let's imagine a bad situation:  
 
@@ -944,7 +951,8 @@ function addItemToCart(cart: CartItem[], item:Item):CartItem[] {
 
 **[⬆ 回到顶部](#目录)**
 
-### Don't write to global functions
+### 不要写全局函数
+Don't write to global functions
 
 Polluting globals is a bad practice in JavaScript because you could clash with another library and the user of your API would be none-the-wiser until they get an exception in production. Let's think about an example: what if you wanted to extend JavaScript's native Array method to have a diff method that could show the difference between two arrays? You could write your new function to the `Array.prototype`, but it could clash with another library that tried to do the same thing. What if that other library was just using `diff` to find the difference between the first and last elements of an array? This is why it would be much better to just use classes and simply extend the `Array` global.
 
@@ -1296,7 +1304,7 @@ function travelToTexas(vehicle: Vehicle) {
 
 **[⬆ 回到顶部](#目录)**
 
-### Don't over-optimize
+### 不要过度优化
 
 Modern browsers do a lot of optimization under-the-hood at runtime. A lot of times, if you are optimizing then you are just wasting your time. There are good [resources](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers) for seeing where optimization is lacking. Target those in the meantime, until they are fixed if they can be.
 
