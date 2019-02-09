@@ -63,7 +63,7 @@ function between<T>(value: T, left: T, right: T) {
 
 ### 变量名可拼读出来
 
-如果你不能读出它，你在讨论它时听起来就会像个白痴。
+如果你不能读出它，你在讨论它时听起来就会像个傻帽。
 
 **反例:**
 
@@ -125,7 +125,7 @@ function getUser(): User;
 
 ### 变量名可检索
 
-我们读代码比写的要多。写代码要是可读和可查找的，这很重要。 不取一些对理解程序有用的变量名，那就会坑阅读代码的人。要让命名可查找，像[TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) 这样的工具可以帮助识别未命名的常量。
+我们读代码比写的要多，代码的易读性和可检索非常重要。如果不抽取并命名变量，那就是坑阅读代码的人。要命名这样就可检索，像[TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) 这样的工具可以帮助识别未命名的常量。
 
 **反例:**
 
@@ -482,7 +482,7 @@ addMonthToDate(date, 1);
 
 When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.
 
-当有多个抽象级别时，您的函数应该是做得太多了。拆分函数以便可重用、也让测试更容易。
+当有多个抽象级别时，您的函数应该是做得太多事了。拆分函数以便可重用、也让测试更容易。
 
 **反例:**
 
@@ -586,7 +586,7 @@ function parse(tokens: Token[]): SyntaxTree {
 
 Do your absolute best to avoid duplicate code.Duplicate code is bad because it means that there's more than one place to alter something if you need to change some logic.  
 
-尽力避免重复代码，重复乃万恶之源！重复意味着如果您要修改某种逻辑，需要修改多处代码:cry:。
+避免重复代码，重复乃万恶之源！重复意味着如果您要修改某种逻辑，需要修改多处代码:cry:。
 
 Imagine if you run a restaurant and you keep track of your inventory: all your tomatoes, onions, garlic, spices, etc. If you have multiple lists that you keep this on, then all have to be updated when you serve a dish with tomatoes in them. If you only have one list, there's only one place to update!  
 
@@ -729,7 +729,7 @@ You should be critical about code duplication. Sometimes there is a tradeoff bet
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用`Object.assign`或解构来设置默认对象
+### 使用`Object.assign`或`解构`来设置默认
 
 **反例:**
 
@@ -807,13 +807,13 @@ createMenu({ body: 'Bar' });
 
 ```
 
-为了避免副作用，可以设置TypeScript编译器，不允许显式传递未定义或`null`值。参见TypeScript中的`--strictnullcheck`选项。
+为了避免副作用，可以设置TypeScript编译器，不允许显式传递`undefined`或`null`值。参见TypeScript中的`--strictnullcheck`选项。
 
 **[⬆ 回到顶部](#目录)**
 
 ### 不要使用Flag参数
 
-Flag参数告诉用户这个函数做了不止一件事。如果函数使用布尔值实现不同的代码路径，则将其拆分。
+Flag参数告诉用户这个函数做了不止一件事。如果函数使用布尔值实现不同的代码逻辑路径，则将其拆分。
 
 **反例:**
 
@@ -859,7 +859,7 @@ function createTempFile(name:string) {
 
 A function produces a side effect if it does anything other than take a value in and return another value or values.A side effect could be writing to a file, modifying some global variable, or accidentally wiring all your money to a stranger.  
 
-函数如果没有一个输入却返回另一个或多个输出，则会产生副作用。副作用可能是写入文件，修改某个全局变量，或者意外地将您所有的钱转给一个陌生人。
+函数如果没有一个输入却返回一个或多个输出，则会产生副作用。副作用可能是写入文件，修改某个全局变量，或者意外地将您所有的钱转给一个陌生人。
 
 Now, you do need to have side effects in a program on occasion. Like the previous example, you might need to write to a file.What you want to do is to centralize where you are doing this. Don't have several functions and classes that write to a particular file.Have one service that does it. One and only one.  
 
@@ -867,7 +867,7 @@ Now, you do need to have side effects in a program on occasion. Like the previou
 
 The main point is to avoid common pitfalls like sharing state between objects without any structure, using mutable data types that can be written to by anything, and not centralizing where your side effects occur. If you can do this, you will be happier than the vast majority of other programmers.
 
-重点是要避免常见的陷阱，比如在没有任何结构的对象之间共享状态、使用任何东西都可以写入的可变数据类型，以及不集中副作用发生的位置。如果你能做到这一点，你会比绝大多数其他程序员更快乐。
+重点是要规避常见陷阱，比如，在无结构对象之间共享状态、使用可变数据类型，以及不确定副作用发生的位置。如果你能做到这点，你才可能笑到最后！
 
 **反例:**
 
@@ -919,26 +919,26 @@ console.log(name);
 
 In JavaScript, primitives are passed by value and objects/arrays are passed by reference. In the case of objects and arrays, if your function makes a change in a shopping cart array, for example, by adding an item to purchase, then any other function that uses that cart array will be affected by this addition. That may be great, however it can be bad too. Let's imagine a bad situation:  
 
-在JavaScript中，原语通过值传递，对象/数组通过引用传递。在对象和数组的情况下，如果您的函数在购物车数组中进行了更改，例如，通过添加要购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加的影响。这也许是好事，但也可能是坏事。让我们想象一个糟糕的情况:
+在JavaScript中，原类型是值传递，对象、数组是引用传递。有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加操作的影响。这也许是好事，但也可能是坏事。让我们想象一个糟糕的情况:
 
 The user clicks the "Purchase", button which calls a purchase function that spawns a network request and sends the cart array to the server. Because of a bad network connection, the purchase function has to keep retrying the request. Now, what if in the meantime the user accidentally clicks "Add to Cart" button on an item they don't actually want before the network request begins? If that happens and the network request begins, then that purchase function will send the accidentally added item because it has a reference to a shopping cart array that the *addItemToCart* function modified by adding an unwanted item.  
 
-用户单击“购买”按钮，该按钮调用生成网络请求的购买函数，并将购物车数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始之前不小心单击了他们实际上不想要的项目上的“Add to Cart”按钮，该怎么办?如果发生这种情况，并且网络请求开始，那么purchase函数将发送意外添加的项，因为它引用了一个购物车数组，addItemToCart函数通过添加不需要的项修改了该数组。
+用户点击“购买”按钮，该按钮调用购买函数，函数请求网络并将购物车数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始前不小心点击了某个不想要的项目上的“Add to Cart”按钮，该怎么办？如果发生这种情况，并且网络请求开始，那么purchase函数将发送意外添加的项，因为它引用了一个购物车数组，addItemToCart函数通过添加不需要的项修改了该数组。
 
 A great solution would be for the *addItemToCart* to always clone the cart, edit it, and return the clone. This ensures that no other functions that are holding onto a reference of the shopping cart will be affected by any changes.  
 
 一个很好的解决方案是addItemToCart总是克隆购物车、编辑购物车并返回克隆。这确保保存购物车引用的其他函数不会受到任何更改的影响。
 
 Two caveats to mention to this approach:
-关于这种方法有两点需要注意:
+这种方法要注意两点:
 
 1. There might be cases where you actually want to modify the input object, but when you adopt this programming practice you will find that those cases are pretty rare. Most things can be refactored to have no side effects! (see [pure function](https://en.wikipedia.org/wiki/Pure_function))
 
-在某些情况下，您可能确实想要修改输入对象，但是当您采用这种编程实践时，您会发现这种情况非常少见。大多数东西都可以重构，没有副作用!(见纯函数)
+1. 在某些情况下，您可能确实想要修改输入对象，但是当您采用这种编程实践时，您会发现这种情况非常少见。大多数东西都可以重构，没有副作用！(见[纯函数](https://en.wikipedia.org/wiki/Pure_function))
 
 2. Cloning big objects can be very expensive in terms of performance. Luckily, this isn't a big issue in practice because there are great libraries that allow this kind of programming approach to be fast and not as memory intensive as it would be for you to manually clone objects and arrays.
 
-就性能而言，克隆大型对象可能非常昂贵。幸运的是，这在实践中不是一个大问题，因为有一些很好的库允许这种编程方法快速，并且不像手动克隆对象和数组那样占用大量内存。
+2. 性能方面，克隆大对象代价比较大。幸运的是，有一些很好的库提供了一些方法，高效快速且不像手动克隆对象和数组那样占用大量内存。
 
 
 **反例:**
