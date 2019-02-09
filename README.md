@@ -20,7 +20,7 @@
 
 这不是TypeScript编码规范，是将Robert C. Martin的[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)应用到TypeScript上，指导如何使用TypeScript编写[易读、可重用和可重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-并不是每一个原则都必须严格遵守，得到普遍认同的原则就更少了。这些虽然只是指导，没有其他内容，但却是*Clean Code*作者多年经验的总结。
+并不是每一个原则都必须严格遵守，能得到普遍认同的原则就更少了。这虽然只是指导，没有其他内容，但却是*Clean Code*作者多年经验的总结。
 
 软件工程技术已经有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队的JavaScript代码质量的试金石。
 
@@ -215,7 +215,7 @@ const transaction = charge(user, subscription);
 
 ### 避免重复描述
 
-如果您的类名或对象名已经表达了某中信息，在内部变量名中不要再重复。
+如果您的类名或对象名已经表达了某种信息，在内部变量名中不要再重复表达。
 
 **反例:**
 
@@ -301,15 +301,15 @@ function loadPages(count: number = 10) {
 
 ### 参数越少越好 (理想情况不超过2个)
 
-参数个数限制很重要，这样函数测试会更容易，超过三个参数会导致出现需要测试各种不同参数的组合场景。
+限制参数个数很重要，这样函数测试会更容易，超过三个参数会导致测试复杂度激增，需要测试众多不同参数的组合场景。
 
 One or two arguments is the ideal case, and three should be avoided if possible. Anything more than that should be consolidated.Usually, if you have more than two arguments then your function is trying to do too much.In cases where it's not, most of the time a higher-level object will suffice as an argument.  
 
-理想情况，只有一两个参数，应该尽可能避免三个参数。通常，如果您有两个以上的参数，那么您的函数就做得太多了。若不是这样，多数情况抽象成一个高层对象作为参数更好。
+理想情况，只有一两个参数，应该尽量避免三个参数。通常，如果您有两个以上的参数，那么您的函数就做得太多了。
 
 Consider using object literals if you are finding yourself needing a lot of arguments.  To make it obvious what properties the function expects, you can use the [destructuring](https://basarat.gitbooks.io/typescript/docs/destructuring.html) syntax.This has a few advantages:
 
-如果需要很多参数，请您考虑使用对象。为了使函数期望的属性更清晰，可以使用[解构](https://basarat.gitbooks.io/typescript/docs/destructuring.html)，这有几个优点：
+如果需要很多参数，请您考虑使用对象。为了使函数的属性更清晰，可以使用[解构](https://basarat.gitbooks.io/typescript/docs/destructuring.html)，它有几个优点：
 
 1. When someone looks at the function signature, it's immediately clear what properties are being used.
 
@@ -317,13 +317,11 @@ Consider using object literals if you are finding yourself needing a lot of argu
 
 2. Destructuring also clones the specified primitive values of the argument object passed into the function. This can help prevent side effects. Note: objects and arrays that are destructured from the argument object are NOT cloned
 
-2. 解构克隆传递给函数的参数对象的指定原始值，这有助于预防副作用。(注意：不会克隆从参数对象中解构的对象和数组)
+2. 解构对传递给函数的参数对象做深拷贝，这有助于预防副作用。(注意：不会克隆从参数对象中解构的对象和数组)
 
 3. TypeScript warns you about unused properties, which would be impossible without destructuring.
 
-3. TypeScript会对未使用的属性显示警告，如果没有解构这是不可能的。
-
-
+3. TypeScript会对未使用的属性显示警告。
 
 **反例:**
 
@@ -394,7 +392,7 @@ createMenu({
 
 This is by far the most important rule in software engineering. When functions do more than one thing, they are harder to compose, test, and reason about. When you can isolate a function to just one action, they can be refactored easily and your code will read much cleaner. If you take nothing else away from this guide other than this, you'll be ahead of many developers.
 
-这是目前为止软件工程中最重要的规则。当函数做不止一件事时，它就更难组合、测试以及推理。当您将函数分割只实现一个操作时，它就更易于重构、代码就更清晰。如果您只从本指南中了解到这一点，那么您就优于多数程序员了。
+这是目前为止软件工程中最重要的规则。当函数做不止一件事时，它就更难组合、测试以及推理。当您的函数只有一个行为，它就更易于重构、代码就更清晰。如果您只从本指南中了解到这一点，那么您已超过多数程序员了。
 
 **反例:**
 
@@ -442,7 +440,7 @@ function isActiveClient(client: Client) {
 
 ### 名副其实
 
-从函数名就可看出函数的功能。
+从函数名就可了解函数的实际功能。
 
 **反例:**
 
@@ -484,7 +482,7 @@ addMonthToDate(date, 1);
 
 When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.
 
-当您有多个抽象级别时，您的函数通常会做得太多。分解函数可以实现可重用性和更容易的测试。
+当有多个抽象级别时，您的函数应该是做得太多了。拆分函数以便可重用、也让测试更容易。
 
 **反例:**
 
@@ -588,23 +586,19 @@ function parse(tokens: Token[]): SyntaxTree {
 
 Do your absolute best to avoid duplicate code.Duplicate code is bad because it means that there's more than one place to alter something if you need to change some logic.  
 
-尽力避免重复代码。 重复代码很糟糕，因为它意味着如果您需要更改某些逻辑，则可以有多个位置来更改某些内容。
+尽力避免重复代码，重复乃万恶之源！重复意味着如果您要修改某种逻辑，需要修改多处代码:cry:。
 
-Imagine if you run a restaurant and you keep track of your inventory: all your tomatoes, onions, garlic, spices, etc.
+Imagine if you run a restaurant and you keep track of your inventory: all your tomatoes, onions, garlic, spices, etc. If you have multiple lists that you keep this on, then all have to be updated when you serve a dish with tomatoes in them. If you only have one list, there's only one place to update!  
 
-If you have multiple lists that you keep this on, then all have to be updated when you serve a dish with tomatoes in them.
-
-If you only have one list, there's only one place to update!  
-
-想象一下，如果你经营一家餐厅，你要记录你的库存:你所有的西红柿、洋葱、大蒜、香料等等。如果您只有一个列表，那么只有一个地方可以更新!
+想象一下，如果你经营一家餐厅，你要记录你的库存:所有的西红柿、洋葱、大蒜、香料等等。如果有多个库存列表，那维护起来是多么痛苦!
 
 Oftentimes you have duplicate code because you have two or more slightly different things, that share a lot in common, but their differences force you to have two or more separate functions that do much of the same things. Removing duplicate code means creating an abstraction that can handle this set of different things with just one function/module/class.  
 
-通常你有重复的代码，因为你有两个或两个以上稍微不同的东西，它们有很多共同点，但是它们的不同迫使你有两个或多个独立的函数来做很多相同的事情。删除重复代码意味着创建一个抽象，该抽象仅用一个函数/模块/类就可以处理这组不同的东西。
+存在重复代码，是因为有两个或两个以上很近似的功能，只有一点点不同，但是这些不同迫使你用多个独立的函数来做很多几乎相同的事情。删除重复代码，则意味着创建一个抽象，该抽象仅用一个函数/模块/类就可以处理这组不同的东西。
 
 Getting the abstraction right is critical, that's why you should follow the [SOLID](#solid) principles. Bad abstractions can be worse than duplicate code, so be careful! Having said this, if you can make a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself updating multiple places anytime you want to change one thing.
 
-获得正确的抽象是至关重要的，这就是为什么您应该遵循坚实的原则。糟糕的抽象可能比重复的代码更糟糕，所以要小心!话虽如此，如果你能做一个好的抽象，那就去做吧!不要重复你自己，否则你会发现你随时都在更新多个地方，只要你想要改变一件事。
+正确抽象至关重要，这就是为什么您应该遵循[SOLID原则](#SOLID原则)。糟糕的抽象可能还不如重复代码，所以要小心！话虽如此，如果能做好抽象那就去做吧！尽量不要重复。
 
 **反例:**
 
@@ -730,7 +724,7 @@ function showEmployeeList(employee: Developer | Manager) {
 
 You should be critical about code duplication. Sometimes there is a tradeoff between duplicated code and increased complexity by introducing unnecessary abstraction. When two implementations from two different modules look similar but live in different domains, duplication might be acceptable and preferred over extracting the common code. The extracted common code in this case introduces an indirect dependency between the two modules.
 
-您应该对代码复制持批评态度。有时，在重复代码和引入不必要的抽象而增加的复杂性之间存在权衡。当来自两个不同模块的两个实现看起来相似，但位于不同的域中时，复制可能是可以接受的，并且优于提取公共代码。在本例中提取的公共代码引入了两个模块之间的间接依赖关系。
+您应当对复制代码持批评态度。有时，在重复代码和引入不必要的抽象而增加的复杂性之间，需要做权衡。当来自两个不同模块的两个实现看起来相似，但位于不同领域，复制也是可以接受的，并且比抽取公共代码要好一点。在本例中，抽取的公共代码导致两个模块之间产生间接的依赖关系。
 
 
 **[⬆ 回到顶部](#目录)**
@@ -813,13 +807,13 @@ createMenu({ body: 'Bar' });
 
 ```
 
-为了避免任何副作用和意外行为，通过显式传递未定义或`null`值，您可以告诉TypeScript编译器不允许它。参见TypeScript中的`--strictnullcheck`选项。
+为了避免副作用，可以设置TypeScript编译器，不允许显式传递未定义或`null`值。参见TypeScript中的`--strictnullcheck`选项。
 
 **[⬆ 回到顶部](#目录)**
 
 ### 不要使用Flag参数
 
-标志告诉用户这个函数的功能不止一件。函数应该做一件事。如果函数遵循基于布尔值的不同代码路径，则将其拆分。
+Flag参数告诉用户这个函数做了不止一件事。如果函数使用布尔值实现不同的代码路径，则将其拆分。
 
 **反例:**
 
@@ -865,7 +859,7 @@ function createTempFile(name:string) {
 
 A function produces a side effect if it does anything other than take a value in and return another value or values.A side effect could be writing to a file, modifying some global variable, or accidentally wiring all your money to a stranger.  
 
-函数如果不接受一个值并返回另一个或多个值，则会产生副作用。副作用可能是写入文件，修改某个全局变量，或者意外地将您所有的钱连接到一个陌生人。
+函数如果没有一个输入却返回另一个或多个输出，则会产生副作用。副作用可能是写入文件，修改某个全局变量，或者意外地将您所有的钱转给一个陌生人。
 
 Now, you do need to have side effects in a program on occasion. Like the previous example, you might need to write to a file.What you want to do is to centralize where you are doing this. Don't have several functions and classes that write to a particular file.Have one service that does it. One and only one.  
 
