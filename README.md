@@ -1022,13 +1022,11 @@ class MyArray<T> extends Array<T> {
 
 **[⬆ 回到顶部](#目录)**
 
-### 比起命令式编程，更喜欢函数式编程
-
-Favor functional programming over imperative programming
+### 函数式编程优于命令式编程
 
 Favor this style of programming when you can.
 
-尽可能喜欢这种编程风格。
+尽量使用函数式编程！
 
 **反例:**
 
@@ -1150,7 +1148,8 @@ if (canActivateService(subscription, account)) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 避免反向条件 Avoid negative conditionals
+### 避免负条件 
+Avoid negative conditionals
 
 **反例:**
 
@@ -1194,7 +1193,9 @@ if (!isEmailUsed(node)) {
 
 This seems like an impossible task. Upon first hearing this, most people say, "how am I supposed to do anything without an `if` statement?" The answer is that you can use polymorphism to achieve the same task in many cases. The second question is usually, *"well that's great but why would I want to do that?"* The answer is a previous clean code concept we learned: a function should only do one thing. When you have classes and functions that have `if` statements, you are telling your user that your function does more than one thing. Remember, just do one thing.
 
-这似乎是一项不可能完成的任务。第一次听到这个，大多数人会说，“如果没有if语句，我该怎么做呢?”答案是，在许多情况下，您可以使用多态性来完成相同的任务。第二个问题通常是，“这很好，但我为什么要这么做?”答案是我们之前学过的一个干净的代码概念:函数应该只做一件事。当你的类和函数有if语句时，你是在告诉你的用户你的函数不止做一件事。记住，只做一件事。
+这似乎是一项不可能完成的任务。
+第一次听到这个，大多数人会说，“如果没有if语句，我该怎么做呢？”答案是，在多数情况下，您可以使用多态性来完成相同的任务。
+第二个问题通常是，“这很好，但我为什么要这么做？”答案是，我们之前学过的一个概念:函数应该只做一件事。当你的类和函数有if语句时，你是在告诉你的用户你的函数不止做一件事。记住，函数只做一件事！
 
 **反例:**
 
@@ -1288,7 +1289,7 @@ class Cessna extends Airplane {
 
 TypeScript is a strict syntactical superset of JavaScript and adds optional static type checking to the language.Always prefer to specify types of variables, parameters and return values to leverage the full power of TypeScript features.It makes refactoring more easier.
 
-TypeScript是JavaScript的一个严格的语法超集，它向语言中添加了可选的静态类型检查。总是喜欢指定变量、参数和返回值的类型，以充分利用TypeScript特性的强大功能。它使重构更容易。
+TypeScript是JavaScript的一个严格的语法超集，它向语言中添加了可选的静态类型检查。指定变量、参数和返回值的类型，以充分利用TypeScript特性的强大功能。它使得重构更容易。
 
 **反例:**
 
@@ -1330,7 +1331,7 @@ function travelToTexas(vehicle: Vehicle) {
 
 Modern browsers do a lot of optimization under-the-hood at runtime. A lot of times, if you are optimizing then you are just wasting your time. There are good [resources](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers) for seeing where optimization is lacking. Target those in the meantime, until they are fixed if they can be.
 
-现代浏览器在运行时进行大量的底层优化。很多时候，如果你在优化，那么你只是在浪费时间。有很好的资源可以看到哪里缺乏优化。在此期间锁定这些目标，直到它们能够被修复为止。
+现代浏览器在运行时进行大量的底层优化。很多时候，如果你再优化那只是在浪费时间。有很好的[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以定位哪里需要优化，找到这些地方，修复它。
 
 **反例:**
 
@@ -1362,11 +1363,11 @@ for (let i = 0; i < list.length; i++) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 删除dead code
+### 删除无用代码
 
 Dead code is just as bad as duplicate code. There's no reason to keep it in your codebase.If it's not being called, get rid of it! It will still be safe in your version history if you still need it.
 
-死代码和重复代码一样糟糕。没有理由把它保存在代码库中。如果它没有被调用，就删除它!如果您仍然需要它，它在您的版本历史中仍然是安全的。
+无用代码和重复代码一样糟糕，没有理由把它保存在代码库中。如果它没有被调用，请删除它！如果您仍然需要它，它在您的版本历史等待着您。
 
 **反例:**
 
@@ -1414,11 +1415,11 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 TypeScript supports getter/setter syntax.Using getters and setters to access data from objects that encapsulate behavior could be better that simply looking for a property on an object."Why?" you might ask. Well, here's a list of reasons:
 
-TypeScript支持getter/setter语法。使用getter和setter从封装行为的对象访问数据可能比简单地在对象上查找属性要好。你可能会问:“为什么?”这里有一些原因:
+TypeScript支持getter/setter语法。使用getter和setter从对象中访问数据可能比简单地在对象上查找属性要好。为什么？原因如下:
 
 * When you want to do more beyond getting an object property, you don't have to look up and change every accessor in your codebase.
 
-当您想要做更多的事情而不仅仅是获取对象属性时，您不必查找并更改代码基中的每个访问器。
+* 当您想要做更多的事情而不仅仅是获取对象属性时，您不必查找并更改代码中的每个访问器。*
 
 * Makes adding validation simple when doing a set.
 
@@ -1430,7 +1431,7 @@ TypeScript支持getter/setter语法。使用getter和setter从封装行为的对
 
 * Easy to add logging and error handling when getting and setting.
 
-在获取和设置时很容易添加日志记录和错误处理。
+更容易添加日志记录和错误处理。
 
 * You can lazy load your object's properties, let's say getting it from a server.
 
