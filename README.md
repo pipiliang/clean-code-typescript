@@ -1611,11 +1611,11 @@ interface Config {
 
 ## 类
 
-### 小、小、小，重要事情说三遍
+### 小、小、小！要事情说三遍
 
 The class' size is measured by it's responsibility. Following the *Single Responsibility principle* a class should be small.
 
-类的大小是由它的职责来度量的。按照单一责任原则，一个类应该很小。
+类的大小是由它的职责来度量的。按照*单一职责原则*，一个类应该尽量小。
 
 **反例:**
 
@@ -1691,7 +1691,7 @@ Coupling refers to how related or dependent are two classes toward each other. C
 
 Good software design has **high cohesion** and **low coupling**.
 
-好的软件设计具有高内聚性和低耦合性。
+好的软件设计具有**高内聚性**和**低耦合性**。
 
 **反例:**
 
@@ -1809,7 +1809,7 @@ Prefer composition over inheritance
 
 As stated famously in [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four, you should prefer composition over inheritance where you can. There are lots of good reasons to use inheritance and lots of good reasons to use composition. The main point for this maxim is that if your mind instinctively goes for inheritance, try to think if composition could model your problem better. In some cases it can.  
 
-正如“四人帮”在设计模式中所指出的那样，在可能的情况下，您应该更喜欢组合而不是继承。有很多好的理由使用继承，也有很多好的理由使用组合。这句格言的主要观点是，如果你的头脑本能地倾向于继承，试着想想组合是否能更好地模拟你的问题。在某些情况下可以。  
+正如“四人帮”在[设计模式](https://en.wikipedia.org/wiki/Design_Patterns)中所指出的那样，在可能的情况下，您应该更喜欢组合而不是继承。有很多好的理由使用继承，也有很多好的理由使用组合。这句格言的主要观点是，如果你的头脑本能地倾向于继承，试着想想组合是否能更好地模拟你的问题。在某些情况下可以。  
 
 You might be wondering then, "when should I use inheritance?" It depends on your problem at hand, but this is a decent list of when inheritance makes more sense than composition:
 
@@ -2047,6 +2047,8 @@ const query = new QueryBuilder()
 
 As stated in Clean Code, "There should never be more than one reason for a class to change". It's tempting to jam-pack a class with a lot of functionality, like when you can only take one suitcase on your flight. The issue with this is that your class won't be conceptually cohesive and it will give it many reasons to change. Minimizing the amount of times you need to change a class is important. It's important because if too much functionality is in one class and you modify a piece of it, it can be difficult to understand how that will affect other dependent modules in your codebase.
 
+正如Clean代码中所述，“类更改的原因不应该超过一个”。将一个具有很多功能的类打包在一起是很诱人的，比如当您在航班上只能带一个手提箱时。这样做的问题是，您的类在概念上不具有内聚性，而且它会给出许多更改的理由。最小化更改类所需的时间非常重要。这很重要，因为如果一个类中有太多的功能，而您修改了其中的一部分，那么很难理解这将如何影响代码库中的其他依赖模块。
+
 **反例:**
 
 ```ts
@@ -2124,6 +2126,8 @@ class UserSettings {
 ### 开闭原则 (OCP)
 
 As stated by Bertrand Meyer, "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification." What does that mean though? This principle basically states that you should allow users to add new functionalities without changing existing code.
+
+正如Bertrand Meyer所说，“软件实体(类、模块、函数等)应该对扩展开放，但对修改关闭。”这意味着什么呢?这个原则基本上是说，您应该允许用户在不更改现有代码的情况下添加新功能。
 
 **反例:**
 
@@ -2263,9 +2267,11 @@ class HttpRequester {
 
 This is a scary term for a very simple concept. It's formally defined as "If S is a subtype of T, then objects of type T may be replaced with objects of type S (i.e., objects of type S may substitute objects of type T) without altering any of the desirable properties of that program (correctness, task performed, etc.)." That's an even scarier definition.  
 
-  
+对于一个非常简单的概念来说，这是一个可怕的术语。它的正式定义是“如果S是T的一个子类型，那么类型T的对象可以被类型S(即，类型S的对象可以替换类型T的对象)，而不会改变该程序的任何可取属性(正确性、执行的任务等)。这是一个更可怕的定义。  
 
 The best explanation for this is if you have a parent class and a child class, then the base class and child class can be used interchangeably without getting incorrect results. This might still be confusing, so let's take a look at the classic Square-Rectangle example. Mathematically, a square is a rectangle, but if you model it using the "is-a" relationship via inheritance, you quickly get into trouble.
+
+对此最好的解释是，如果您有一个父类和一个子类，那么基类和子类可以互换使用，而不会得到不正确的结果。这可能仍然令人困惑，所以让我们看一看经典的正方形矩形的例子。从数学上讲，正方形是矩形，但是如果您通过继承使用“is-a”关系对其建模，您很快就会遇到麻烦。
 
 **反例:**
 
@@ -2435,9 +2441,9 @@ renderLargeShapes(shapes);
 
 ### 接口隔离原则 (ISP)
 
-ISP states that "Clients should not be forced to depend upon interfaces that they do not use.". This principle is very much related to the Single Responsibility Principle.
+ISP states that "Clients should not be forced to depend upon interfaces that they do not use.". This principle is very much related to the Single Responsibility Principle. What it really means is that you should always design your abstractions in a way that the clients that are using the exposed methods do not get the whole pie instead. That also include imposing the clients with the burden of implementing methods that they don’t actually need.
 
-What it really means is that you should always design your abstractions in a way that the clients that are using the exposed methods do not get the whole pie instead. That also include imposing the clients with the burden of implementing methods that they don’t actually need.
+ISP声明“客户不应该被迫依赖于他们不使用的接口。”这一原则与单一责任原则密切相关。它的真正含义是，您应该始终以一种使用公开方法的客户端无法获得整个饼图的方式来设计抽象。这还包括让客户承担实现他们实际上不需要的方法的负担。
 
 **反例:**
 
@@ -2567,15 +2573,23 @@ class EconomicPrinter implements IPrinter {
 
 This principle states two essential things:
 
+这一原则阐述了两件基本的事情:
+
 1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+1. 高级模块不应该依赖于低级模块。两者都应该依赖于抽象
 
 2. Abstractions should not depend upon details. Details should depend on abstractions.
 
+2. 抽象不应该依赖于细节。细节应该依赖于抽象。
+
 This can be hard to understand at first, but if you've worked with Angular, you've seen an implementation of this principle in the form of Dependency Injection (DI). While they are not identical concepts, DIP keeps high-level modules from knowing the details of its low-level modules and setting them up. It can accomplish this through DI. A huge benefit of this is that it reduces the coupling between modules. Coupling is a very bad development pattern because it makes your code hard to refactor.  
 
-  
+这在一开始可能很难理解，但是如果你使用过Angular，你就会看到依赖注入(DI)的形式实现了这一原则。虽然它们不是相同的概念，但是DIP阻止高级模块了解其低级模块的细节并进行设置。它可以通过DI实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合是一种非常糟糕的开发模式，因为它使代码难以重构。
 
 DIP is usually achieved by a using an inversion of control (IoC) container. An example of a powerful IoC container for TypeScript is [InversifyJs](https://www.npmjs.com/package/inversify)
+
+DIP通常是通过使用控制反转(IoC)容器来实现的。TypeScript强大的IoC容器的一个例子是[InversifyJs](https://www.npmjs.com/package/inversify)
 
 **反例:**
 
@@ -2705,40 +2719,61 @@ await report = await reader.read('report.json');
 
 ## 测试
 
-Testing is more important than shipping. If you have no tests or an inadequate amount, then every time you ship code you won't be sure that you didn't break anything.
+Testing is more important than shipping. If you have no tests or an inadequate amount, then every time you ship code you won't be sure that you didn't break anything.Deciding on what constitutes an adequate amount is up to your team, but having 100% coverage (all statements and branches) is how you achieve very high confidence and developer peace of mind. This means that in addition to having a great testing framework, you also need to use a good coverage tool.
 
-Deciding on what constitutes an adequate amount is up to your team, but having 100% coverage (all statements and branches)
+测试比发货更重要。如果没有测试或数量不足，那么每次发布代码时都不能确保没有破坏任何东西。决定什么是足够的数量取决于您的团队，但是拥有100%的覆盖率(所有的报表和分支)是您如何获得非常高的信心和开发人员内心的平静。这意味着除了拥有一个优秀的测试框架之外，您还需要使用一个良好的覆盖率工具。
 
-is how you achieve very high confidence and developer peace of mind. This means that in addition to having a great testing framework, you also need to use a good coverage tool.
+There's no excuse to not write tests. There are plenty of good JS test frameworks with typings support for TypeScript, so find one that your team prefers. When you find one that works for your team, then aim to always write tests for every new feature/module you introduce. If your preferred method is Test Driven Development (TDD), that is great, but the main point is to just make sure you are reaching your coverage goals before launching any feature, or refactoring an existing one. 
 
-There's no excuse to not write tests. There are plenty of good JS test frameworks with typings support for TypeScript, so find one that your team prefers. When you find one that works for your team, then aim to always write tests for every new feature/module you introduce. If your preferred method is Test Driven Development (TDD), that is great, but the main point is to just make sure you are reaching your coverage goals before launching any feature, or refactoring an existing one.  
+没有理由不编写测试。有很多优秀的JS测试框架都支持TypeScript的类型，所以找一个你的团队喜欢的。当你找到一个适合你的团队的，然后总是为你引入的每个新特性/模块编写测试。如果您喜欢的方法是测试驱动开发(TDD)，那就太好了，但是重点是确保在启动任何特性或重构现有特性之前，您已经达到了覆盖目标。 
 
-### TDD三法则
+### TDD（测试驱动开发）三定律
 1. You are not allowed to write any production code unless it is to make a failing unit test pass.
+您不允许编写任何生产代码，除非它通过了失败的单元测试
+在编写不能通过的单元测试前，不可编写生产代码
+
 2. You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
+您不允许编写足以失败的任何单元测试;编译失败就是失败。
+只可编写刚好无法通过的单元测试，不能编译也算不过。
+
 3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
+不允许编写超过通过一个失败的单元测试所需的生产代码。
+只可编写刚好足以通过当前失败测试的生产代码。
 
 **[⬆ 回到顶部](#目录)**
 
-### F.I.R.S.T.规则
+### F.I.R.S.T.准则
 
 Clean tests should follow the rules:
+整洁的测试应遵循以下准则:
 
 * **Fast** tests should be fast because we want to run them frequently.
 
+- **快速**（Fast），测试应该快（及时反馈出业务代码的问题）。
+
 * **Independent** tests should not depend on each other. They should provide same output whether run independently or all together in any order.
+
+- **独立**（Independent） 每个测试流程应该独立。
 
 * **Repeatable** tests should be repeatable in any environment and there should be no excuse for why they fail.
 
+- **可重复**（Repeatable） 测试应该在任何环境上都能重复通过。
+
 * **Self-Validating** a test should answer with either *Passed* or *Failed*. You don't need to compare log files to answer if a test passed.
+
+- **自我验证**（Self-Validating） 测试结果应该明确*通过*或者*失败*。
 
 * **Timely** unit tests should be written before the production code. If you write tests after the production code, you might find writing tests too hard.
 
+- **及时**（Timely） 测试代码应该在产品代码之前编写，如果在产品代码之后编写。你会发现写起来很困难。
+
 **[⬆ 回到顶部](#目录)**
 
-### Single concept per test
+### 单一的测试每个概念
 
 Tests should also follow the *Single Responsibility Principle*. Make only one assert per unit test.
+
+测试也应该遵循*单一职责原则*。每个单元测试只做一个断言。
 
 **反例:**
 
@@ -2820,9 +2855,11 @@ describe('AwesomeDate', () => {
 
 **[⬆ 回到顶部](#目录)**
 
-### The name of the test should reveal it's intention
+### 测试用例名称应该显示它的意图
 
 When a test fail, it's name is the first indication of what may have gone wrong.
+
+当测试失败时，它的名称是可能出错的第一个指示。
 
 **反例:**
 
@@ -2872,13 +2909,17 @@ describe('Calendar', () => {
 
 ## 并发
 
-### Promises优于Callbacks
+### 用 Promises 替代回调
 
 Callbacks aren't clean, and they cause excessive amounts of nesting *(the callback hell)*.  
 
-There are utilities that transform existing functions using the callback style to a version that returns promises 
+回调不够整洁而且会导致过多的嵌套*(回调地狱)*。
 
-(for Node.js see [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), for general purpose see [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify))
+There are utilities that transform existing functions using the callback style to a version that returns promises (for Node.js see [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), for general purpose see [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify))
+
+有些工具程序可以将现有函数转换为promise对象：
+- Node.js 参见[`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original)
+- 通用参见[pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify)
 
 **反例:**
 
@@ -2962,27 +3003,27 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
 
 ```
 
-Promises supports a few patterns that could be useful in some cases:  
+Promises supports a few helper methods that help make code more conscise:
+Promises 有以下辅助方法：
 
-| Pattern                  | Description                                |  
-
+| 方法                     | 描述                                       |  
 | ------------------------ | -----------------------------------------  |  
-
 | `Promise.resolve(value)` | Convert a value into a resolved promise.   |  
-
 | `Promise.reject(error)`  | Convert an error into a rejected promise.  |  
-
-| `Promise.all(promises)`  |Returns a new promise which is fulfilled with an array of fulfillment values for the passed promises or rejects with the reason of the first promise that rejects. |
-
+| `Promise.all(promises)`  | Returns a new promise which is fulfilled with an array of fulfillment values for the passed promises or rejects with the reason of the first promise that rejects. |
 | `Promise.race(promises)`|Returns a new promise which is fulfilled/rejected with the result/error of the first settled promise from the array of passed promises. |
 
 `Promise.all` is especially useful when there is a need to run tasks in parallel. `Promise.race` makes it easier to implement things like timeouts for promises.
 
+`Promise.all`在并行运行任务时尤其有用，`Promise.race`让为 Promises 实现超时变得更加容易。
+
 **[⬆ 回到顶部](#目录)**
 
-### Async/Await优于Promises
+### `Async/Await`比`Promises`更好
 
 With async/await syntax you can write code that is far cleaner and more understandable that chained promises. Within a function prefixed with `async` keyword you have a way to tell the JavaScript runtime to pause the execution of code on the `await` keyword (when used on a promise).
+
+使用async/wait语法，您可以编写更简洁、更容易理解的链式promise的代码。在一个以async关键字为前缀的函数中，您可以告诉JavaScript运行时暂停wait关键字上的代码执行(当使用 promise 时)。
 
 **反例:**
 
@@ -3052,21 +3093,16 @@ try {
 
 ## 错误处理
 
-Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function
+Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function execution on the current stack, killing the process (in Node), and notifying you in the console with a stack trace.
 
-execution on the current stack, killing the process (in Node), and notifying you in the console with a stack trace.
+抛出错误是件好事!它们意味着运行时已经成功地识别出程序中的错误，并通过停止当前堆栈上的函数执行(在Node.js)终止进程以及在控制台中使用堆栈跟踪通知您来让您知道。
 
-### Always use Error for throwing or rejecting
+### 抛出`Error`或 reject Error
 
-JavaScript as well as TypeScript allow you to `throw` any object. A Promise can also be rejected with any reason object.  
+JavaScript as well as TypeScript allow you to `throw` any object. A Promise can also be rejected with any reason object. It is advisable to use the `throw` syntax with an `Error` type. This is because your error might be caught in higher level code with a `catch` syntax. It would be very confusing to catch a string message there and would make [debugging more painful](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error).  For the same reason you should reject promises with `Error` types.
 
-It is advisable to use the `throw` syntax with an `Error` type. This is because your error might be caught in higher level code with a `catch` syntax.
-
-It would be very confusing to catch a string message there and would make
-
-[debugging more painful](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error).  
-
-For the same reason you should reject promises with `Error` types.
+JavaScript和TypeScript允许你`throw`任何对象。Promise也可以用任何理由对象拒绝。
+建议使用带有`Error`类型的`throw`语法。这是因为您的错误可能在具有`catch`语法的高级代码中被捕获。在那里捕获字符串消息会非常混乱，并且会使[调试更加痛苦](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error)。出于同样的原因，您应该拒绝带有`Error`类型的 promises。
 
 **反例:**
 
@@ -3112,13 +3148,13 @@ async function get(): Promise<Item[]> {
 
 ```
 
-The benefit of using `Error` types is that it is supported by the syntax `try/catch/finally` and implicitly all errors have the `stack` property which
+The benefit of using `Error` types is that it is supported by the syntax `try/catch/finally` and implicitly all errors have the `stack` property which is very powerful for debugging.  
 
-is very powerful for debugging.  
+使用`Error`类型的好处是`try/catch/finally`语法支持它，并且隐式地所有错误都具有`stack`属性，该属性对于调试非常强大。
 
-There are also another alternatives, not to use the `throw` syntax and instead always return custom error objects. TypeScript makes this even easier.
+There are also another alternatives, not to use the `throw` syntax and instead always return custom error objects. TypeScript makes this even easier. Consider following example:
 
-Consider following example:
+还有另一种选择，即不使用`throw`语法，而总是返回自定义错误对象。TypeScript在这块更容易。考虑下面的例子:
 
 ```ts
 
@@ -3154,11 +3190,15 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 
 For the detailed explanation of this idea refer to the [original post](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
 
+关于这个想法的详细解释，请参考[原文](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9)。
+
 **[⬆ 回到顶部](#目录)**
 
-### 不能忽略捕获errors
+### 别忘了捕获错误
 
 Doing nothing with a caught error doesn't give you the ability to ever fix or react to said error. Logging the error to the console (`console.log`) isn't much better as often times it can get lost in a sea of things printed to the console. If you wrap any bit of code in a `try/catch` it means you think an error may occur there and therefore you should have a plan, or create a code path, for when it occurs.
+
+对捕获的错误不做任何处理并不会使您能够修复或对所述错误作出反应。将错误记录到控制台(console.log)也好不到哪里去，因为它常常会在打印到控制台的大量内容中丢失。如果您在`try/catch`中包装任何代码，这意味着您认为那里可能会发生错误，因此您应该有一个计划，或创建一个代码路径，以便在发生错误时使用。
 
 **反例:**
 
@@ -3208,9 +3248,9 @@ try {
 
 **[⬆ 回到顶部](#目录)**
 
-### Don't ignore rejected promises
+### 不要忽略被拒绝的 promises
 
-For the same reason you shouldn't ignore caught errors from `try/catch`.
+理由和不能在`try/catch`中忽略`Error`一样。
 
 **反例:**
 
@@ -3274,7 +3314,11 @@ try {
 
 Formatting is subjective. Like many rules herein, there is no hard and fast rule that you must follow. The main point is *DO NOT ARGUE* over formatting. There are tons of tools to automate this. Use one! It's a waste of time and money for engineers to argue over formatting. The general rule to follow is *keep consistent formatting rules*.  
 
+格式化是主观的。就像这里的许多规则一样，没有什么硬性规定是你必须遵守的。重点是不要争论格式。有很多工具可以实现自动化。使用一个! 对于工程师来说，争论格式是浪费时间和金钱的。遵循的一般规则是保持一致的格式规则。
+
 For TypeScript there is a powerful tool called [TSLint](https://palantir.github.io/tslint/). It's a static analysis tool that can help you improve dramatically the readability and maintainability of your code. There are ready to use TSLint configurations that you can reference in your projects:
+
+对于TypeScript，有一个强大的工具叫做TSLint。它是一个静态分析工具，可以帮助您显著提高代码的可读性和可维护性。已经准备好使用TSLint配置，您可以在您的项目中参考:
 
 * [TSLint Config Standard](https://www.npmjs.com/package/tslint-config-standard) - standard style rules
 
@@ -3292,9 +3336,13 @@ For TypeScript there is a powerful tool called [TSLint](https://palantir.github.
 
 Refer also to this great [TypeScript StyleGuide and Coding Conventions](https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html) source.
 
-### Use consistent capitalization
+还可以参考这个很棒的[TypeScript风格指南和编码约定](https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html)的源代码。
+
+### 大小写一致
 
 Capitalization tells you a lot about your variables, functions, etc. These rules are subjective, so your team can choose whatever they want. The point is, no matter what you all choose, just *be consistent*.
+
+大写可以告诉你很多关于变量、函数等的信息。这些规则是主观的，所以你的团队可以选择他们想要的任何东西。关键是，无论你们选择什么，都要*一致*。
 
 **反例:**
 
@@ -3346,11 +3394,12 @@ Prefer using `camelCase` for variables, functions and class members.
 
 **[⬆ 回到顶部](#目录)**
 
-### Function callers and callees should be close
+### 调用函数的函数和被调函数应放在较近的位置
 
-If a function calls another, keep those functions vertically close in the source file. Ideally, keep the caller right above the callee.
+If a function calls another, keep those functions vertically close in the source file. Ideally, keep the caller right above the callee. We tend to read code from top-to-bottom, like a newspaper. Because of this, make your code read that way.
 
-We tend to read code from top-to-bottom, like a newspaper. Because of this, make your code read that way.
+当函数间存在相互调用的情况时，应将两者置于较近的位置。理想情况下，应将调用其他函数的函数写在被调用函数的上方。
+我们倾向于从头到尾阅读代码，就像报纸一样。因此，让您的代码以这种方式读取。
 
 **反例:**
 
@@ -3482,6 +3531,8 @@ review.review();
 
 Use type when you might need a union or intersection. Use interface when you want `extends` or `implements`. There is no strict rule however, use the one that works for you.  
 
+当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，使用适合你的规则。
+
 参考这个关于Typescript中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
 
 **反例:**
@@ -3560,9 +3611,9 @@ class Square implements Shape {
 
 The use of a comments is an indication of failure to express without them. Code should be the only source of truth.
 
+使用注释说明没有注释就无法表达。代码应该是真理的唯一来源。
 
 > Don’t comment bad code—rewrite it.  
-
 > — *Brian W. Kernighan and P. J. Plaugher*
 
 ### 代码应该自解释而不是注释
