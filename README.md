@@ -1576,8 +1576,6 @@ interface Config {
 
 ### 小、小、小！要事情说三遍
 
-The class' size is measured by it's responsibility. Following the *Single Responsibility principle* a class should be small.
-
 类的大小是由它的职责来度量的。按照*单一职责原则*，一个类应该尽量小。
 
 **反例:**
@@ -1648,11 +1646,7 @@ High cohesion and low coupling Cohesion defines the degree to which class member
 
 内聚定义了类成员之间相互关联的程度。理想情况下，每个方法都应该使用类中的所有字段。然后我们说这个类是最大内聚的。然而，在实践中，这并不总是可能的，甚至是不可取的。然而，您应该更喜欢高内聚力。
 
-Coupling refers to how related or dependent are two classes toward each other. Classes are said to be low coupled if changes in one of them doesn't affect the other one.  
-
-耦合指的是两个类之间的关联程度。如果其中一个类中的更改不影响另一个类，则称为低耦合类。
-
-Good software design has **high cohesion** and **low coupling**.
+耦合指的是两个类之间的关联程度。如果其中一个类的更改不影响另一个类，则称为低耦合类。
 
 好的软件设计具有**高内聚性**和**低耦合性**。
 
@@ -1880,9 +1874,7 @@ class EmployeeTaxData {
 
 ### 使用方法链
 
-This pattern is very useful and commonly used in many libraries. It allows your code to be expressive, and less verbose. For that reason, use method chaining and take a look at how clean your code will be.
-
-这个模式非常有用，在许多库中都经常使用。它允许您的代码具有表达性，并且不那么冗长。出于这个原因，请使用方法链接，并查看代码的整洁程度。
+这个模式非常有用，在许多库中都可以看到。它让代码表达性更好，且不那么冗长，看起来更整洁。
 
 **反例:**
 
@@ -2010,7 +2002,7 @@ const query = new QueryBuilder()
 
 As stated in Clean Code, "There should never be more than one reason for a class to change". It's tempting to jam-pack a class with a lot of functionality, like when you can only take one suitcase on your flight. The issue with this is that your class won't be conceptually cohesive and it will give it many reasons to change. Minimizing the amount of times you need to change a class is important. It's important because if too much functionality is in one class and you modify a piece of it, it can be difficult to understand how that will affect other dependent modules in your codebase.
 
-正如Clean代码中所述，“类更改的原因不应该超过一个”。将一个具有很多功能的类打包在一起是很诱人的，比如当您在航班上只能带一个手提箱时。这样做的问题是，您的类在概念上不具有内聚性，而且它会给出许多更改的理由。最小化更改类所需的时间非常重要。这很重要，因为如果一个类中有太多的功能，而您修改了其中的一部分，那么很难理解这将如何影响代码库中的其他依赖模块。
+正如**Clean Code**中所述，“类更改的原因不应该超过一个”。将一个具有很多功能的类打包在一起是很诱人的，比如当您在航班上只能带一个手提箱时。这样做的问题是，您的类在概念上不具有内聚性，而且它会给出许多更改的理由。最小化更改类所需的时间非常重要。这很重要，因为如果一个类中有太多的功能，而您修改了其中的一部分，那么很难理解这将如何影响代码库中的其他依赖模块。
 
 **反例:**
 
@@ -2088,9 +2080,7 @@ class UserSettings {
 
 ### 开闭原则 (OCP)
 
-As stated by Bertrand Meyer, "software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification." What does that mean though? This principle basically states that you should allow users to add new functionalities without changing existing code.
-
-正如Bertrand Meyer所说，“软件实体(类、模块、函数等)应该对扩展开放，但对修改关闭。”这意味着什么呢?这个原则基本上是说，您应该允许用户在不更改现有代码的情况下添加新功能。
+正如 Bertrand Meyer 所说，“软件实体(类、模块、函数等)应该对扩展开放，对修改封闭。” 换句话说，就是允许在不更改现有代码的情况下添加新功能。
 
 **反例:**
 
@@ -2682,59 +2672,29 @@ await report = await reader.read('report.json');
 
 ## 测试
 
-Testing is more important than shipping. If you have no tests or an inadequate amount, then every time you ship code you won't be sure that you didn't break anything.Deciding on what constitutes an adequate amount is up to your team, but having 100% coverage (all statements and branches) is how you achieve very high confidence and developer peace of mind. This means that in addition to having a great testing framework, you also need to use a good coverage tool.
+测试比发布(shipping)更重要。如果没有测试或数量不足，那么每次发布代码时都无法确保不引入问题。怎样才算是足够的测试数量？这取决于团队，但是拥有100%的覆盖率(所有语句和分支)会团队更有信心。这一切都要有好的测试框架以及覆盖率工具。
 
-测试比发货更重要。如果没有测试或数量不足，那么每次发布代码时都不能确保没有破坏任何东西。决定什么是足够的数量取决于您的团队，但是拥有100%的覆盖率(所有的报表和分支)是您如何获得非常高的信心和开发人员内心的平静。这意味着除了拥有一个优秀的测试框架之外，您还需要使用一个良好的覆盖率工具。
-
-There's no excuse to not write tests. There are plenty of good JS test frameworks with typings support for TypeScript, so find one that your team prefers. When you find one that works for your team, then aim to always write tests for every new feature/module you introduce. If your preferred method is Test Driven Development (TDD), that is great, but the main point is to just make sure you are reaching your coverage goals before launching any feature, or refactoring an existing one. 
-
-没有理由不编写测试。有很多优秀的JS测试框架都支持TypeScript的类型，所以找一个你的团队喜欢的。当你找到一个适合你的团队的，然后总是为你引入的每个新特性/模块编写测试。如果您喜欢的方法是测试驱动开发(TDD)，那就太好了，但是重点是确保在启动任何特性或重构现有特性之前，您已经达到了覆盖目标。 
+没有任何理由不编写测试。有很多优秀的JS测试框架都支持TypeScript，找一个你的团队喜欢的。然后总是为你引入的每个新特性/模块编写测试。如果您喜欢测试驱动开发(TDD)，那就太好了，重点是确保在开发任何特性或重构现有特性之前，代码已经达到了覆盖目标。 
 
 ### TDD（测试驱动开发）三定律
-1. You are not allowed to write any production code unless it is to make a failing unit test pass.
-您不允许编写任何生产代码，除非它通过了失败的单元测试
-在编写不能通过的单元测试前，不可编写生产代码
 
-2. You are not allowed to write any more of a unit test than is sufficient to fail; and compilation failures are failures.
-您不允许编写足以失败的任何单元测试;编译失败就是失败。
-只可编写刚好无法通过的单元测试，不能编译也算不过。
-
-3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
-不允许编写超过通过一个失败的单元测试所需的生产代码。
-只可编写刚好足以通过当前失败测试的生产代码。
+1. 在编写不能通过的单元测试前，不可编写生产代码。
+2. 只可编写刚好无法通过的单元测试，不能编译也算不过。
+3. 只可编写刚好足以通过当前失败测试的生产代码。
 
 **[⬆ 回到顶部](#目录)**
 
 ### F.I.R.S.T.准则
-
-Clean tests should follow the rules:
 整洁的测试应遵循以下准则:
-
-* **Fast** tests should be fast because we want to run them frequently.
-
 - **快速**（Fast），测试应该快（及时反馈出业务代码的问题）。
-
-* **Independent** tests should not depend on each other. They should provide same output whether run independently or all together in any order.
-
-- **独立**（Independent） 每个测试流程应该独立。
-
-* **Repeatable** tests should be repeatable in any environment and there should be no excuse for why they fail.
-
-- **可重复**（Repeatable） 测试应该在任何环境上都能重复通过。
-
-* **Self-Validating** a test should answer with either *Passed* or *Failed*. You don't need to compare log files to answer if a test passed.
-
-- **自我验证**（Self-Validating） 测试结果应该明确*通过*或者*失败*。
-
-* **Timely** unit tests should be written before the production code. If you write tests after the production code, you might find writing tests too hard.
-
-- **及时**（Timely） 测试代码应该在产品代码之前编写，如果在产品代码之后编写。你会发现写起来很困难。
+- **独立**（Independent），每个测试流程应该独立。
+- **可重复**（Repeatable），测试应该在任何环境上都能重复通过。
+- **自我验证**（Self-Validating），测试结果应该明确*通过*或者*失败*。
+- **及时**（Timely），测试代码应该在产品代码之前编写。
 
 **[⬆ 回到顶部](#目录)**
 
 ### 单一的测试每个概念
-
-Tests should also follow the *Single Responsibility Principle*. Make only one assert per unit test.
 
 测试也应该遵循*单一职责原则*。每个单元测试只做一个断言。
 
@@ -2820,9 +2780,7 @@ describe('AwesomeDate', () => {
 
 ### 测试用例名称应该显示它的意图
 
-When a test fail, it's name is the first indication of what may have gone wrong.
-
-当测试失败时，它的名称是可能出错的第一个指示。
+当测试失败时，它的名称就能告诉你原因。
 
 **反例:**
 
