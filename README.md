@@ -301,25 +301,15 @@ function loadPages(count: number = 10) {
 
 ### 参数越少越好 (理想情况不超过2个)
 
-限制参数个数很重要，这样函数测试会更容易，超过三个参数会导致测试复杂度激增，需要测试众多不同参数的组合场景。
-
-One or two arguments is the ideal case, and three should be avoided if possible. Anything more than that should be consolidated.Usually, if you have more than two arguments then your function is trying to do too much.In cases where it's not, most of the time a higher-level object will suffice as an argument.  
-
-理想情况，只有一两个参数，应该尽量避免三个参数。通常，如果您有两个以上的参数，那么您的函数就做得太多了。
-
-Consider using object literals if you are finding yourself needing a lot of arguments.  To make it obvious what properties the function expects, you can use the [destructuring](https://basarat.gitbooks.io/typescript/docs/destructuring.html) syntax.This has a few advantages:
-
+要限制参数个数，这样函数测试会更容易。超过三个参数会导致测试复杂度激增，需要测试众多不同参数的组合场景。
+理想情况，只有一两个参数，尽量避免三个参数。如果您有两个以上的参数，那么您的函数就复杂了。
 如果需要很多参数，请您考虑使用对象。为了使函数的属性更清晰，可以使用[解构](https://basarat.gitbooks.io/typescript/docs/destructuring.html)，它有几个优点：
-
-1. When someone looks at the function signature, it's immediately clear what properties are being used.
 
 1. 当有人查看函数签名时，会立即清楚使用了哪些属性。
 
 2. Destructuring also clones the specified primitive values of the argument object passed into the function. This can help prevent side effects. Note: objects and arrays that are destructured from the argument object are NOT cloned
 
-2. 解构对传递给函数的参数对象做深拷贝，这有助于预防副作用。(注意：不会克隆从参数对象中解构的对象和数组)
-
-3. TypeScript warns you about unused properties, which would be impossible without destructuring.
+解构对传递给函数的参数对象做深拷贝，这可预防副作用。(注意：**不会克隆**从参数对象中解构的对象和数组)
 
 3. TypeScript会对未使用的属性显示警告。
 
@@ -390,9 +380,7 @@ createMenu({
 
 ### 只做一件事
 
-This is by far the most important rule in software engineering. When functions do more than one thing, they are harder to compose, test, and reason about. When you can isolate a function to just one action, they can be refactored easily and your code will read much cleaner. If you take nothing else away from this guide other than this, you'll be ahead of many developers.
-
-这是目前为止软件工程中最重要的规则。当函数做不止一件事时，它就更难组合、测试以及推理。当您的函数只有一个行为，它就更易于重构、代码就更清晰。如果您只从本指南中了解到这一点，那么您已超过多数程序员了。
+这是目前为止软件工程中最重要的规则。当函数做不止一件事时，它就更难组合、测试以及理解。当您的函数只有一个行为，它就更易于重构、代码就更清晰。如果您只从本指南中了解到这一点，那么您已超过多数程序员了。
 
 **反例:**
 
@@ -440,7 +428,7 @@ function isActiveClient(client: Client) {
 
 ### 名副其实
 
-从函数名就可了解函数的实际功能。
+从函数名就可了解函数的功能。
 
 **反例:**
 
@@ -479,8 +467,6 @@ addMonthToDate(date, 1);
 **[⬆ 回到顶部](#目录)**
 
 ### 每个函数只包含同一个层级的抽象
-
-When you have more than one level of abstraction your function is usually doing too much. Splitting up functions leads to reusability and easier testing.
 
 当有多个抽象级别时，您的函数应该是做得太多事了。拆分函数以便可重用、也让测试更容易。
 
@@ -584,21 +570,14 @@ function parse(tokens: Token[]): SyntaxTree {
 
 ### 删除重复代码
 
-Do your absolute best to avoid duplicate code.Duplicate code is bad because it means that there's more than one place to alter something if you need to change some logic.  
-
 避免重复代码，重复乃万恶之源！重复意味着如果您要修改某种逻辑，需要修改多处代码:cry:。
-
-Imagine if you run a restaurant and you keep track of your inventory: all your tomatoes, onions, garlic, spices, etc. If you have multiple lists that you keep this on, then all have to be updated when you serve a dish with tomatoes in them. If you only have one list, there's only one place to update!  
-
 想象一下，如果你经营一家餐厅，你要记录你的库存:所有的西红柿、洋葱、大蒜、香料等等。如果有多个库存列表，那维护起来是多么痛苦!
 
 Oftentimes you have duplicate code because you have two or more slightly different things, that share a lot in common, but their differences force you to have two or more separate functions that do much of the same things. Removing duplicate code means creating an abstraction that can handle this set of different things with just one function/module/class.  
 
 存在重复代码，是因为有两个或两个以上很近似的功能，只有一点点不同，但是这些不同迫使你用多个独立的函数来做很多几乎相同的事情。删除重复代码，则意味着创建一个抽象，该抽象仅用一个函数/模块/类就可以处理这组不同的东西。
 
-Getting the abstraction right is critical, that's why you should follow the [SOLID](#solid) principles. Bad abstractions can be worse than duplicate code, so be careful! Having said this, if you can make a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself updating multiple places anytime you want to change one thing.
-
-正确抽象至关重要，这就是为什么您应该遵循[SOLID原则](#SOLID原则)。糟糕的抽象可能还不如重复代码，所以要小心！话虽如此，如果能做好抽象那就去做吧！尽量不要重复。
+合理的抽象至关重要，这就是为什么您应该遵循[SOLID原则](#SOLID原则)。糟糕的抽象可能还不如重复代码，所以要小心！话虽如此，如果能做好抽象那就去做吧！尽量不要重复。
 
 **反例:**
 
@@ -729,7 +708,7 @@ You should be critical about code duplication. Sometimes there is a tradeoff bet
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用`Object.assign`或`解构`来设置默认
+### 使用`Object.assign`或`解构`来设置默认对象
 
 **反例:**
 
@@ -813,7 +792,7 @@ createMenu({ body: 'Bar' });
 
 ### 不要使用Flag参数
 
-Flag参数告诉用户这个函数做了不止一件事。如果函数使用布尔值实现不同的代码逻辑路径，则将其拆分。
+Flag参数告诉用户这个函数做了不止一件事。如果函数使用布尔值实现不同的代码逻辑路径，则考虑将其拆分。
 
 **反例:**
 
@@ -857,15 +836,9 @@ function createTempFile(name:string) {
 
 ### 避免副作用 (part1)
 
-A function produces a side effect if it does anything other than take a value in and return another value or values.A side effect could be writing to a file, modifying some global variable, or accidentally wiring all your money to a stranger.  
+当函数产生了除了“接受一个值并返回一个结果”之外的行为时，称该函数产生了副作用。比如写文件、修改全局变量或将你的钱全转给了一个陌生人等。
 
-函数如果没有一个输入却返回一个或多个输出，则会产生副作用。副作用可能是写入文件，修改某个全局变量，或者意外地将您所有的钱转给一个陌生人。
-
-Now, you do need to have side effects in a program on occasion. Like the previous example, you might need to write to a file.What you want to do is to centralize where you are doing this. Don't have several functions and classes that write to a particular file.Have one service that does it. One and only one.  
-
-现在，你需要在一个程序中偶尔有副作用。与前面的示例一样，您可能需要写入文件。你要做的是集中你正在做的事情。不要有几个函数和类写一个特定的文件。有一个服务可以做到这一点。只有一个。
-
-The main point is to avoid common pitfalls like sharing state between objects without any structure, using mutable data types that can be written to by anything, and not centralizing where your side effects occur. If you can do this, you will be happier than the vast majority of other programmers.
+程序在某些情况下确实需要副作用这一行为，如先前例子中的写文件。这时应该将这些功能集中在一起，不要用多个函数/类修改某个文件。用且只用一个 service 完成这一需求。
 
 重点是要规避常见陷阱，比如，在无结构对象之间共享状态、使用可变数据类型，以及不确定副作用发生的位置。如果你能做到这点，你才可能笑到最后！
 
@@ -927,18 +900,18 @@ The user clicks the "Purchase", button which calls a purchase function that spaw
 
 A great solution would be for the *addItemToCart* to always clone the cart, edit it, and return the clone. This ensures that no other functions that are holding onto a reference of the shopping cart will be affected by any changes.  
 
-一个很好的解决方案是addItemToCart总是克隆购物车、编辑购物车并返回克隆。这确保保存购物车引用的其他函数不会受到任何更改的影响。
+一个很好的解决方案是addItemToCart总是克隆购物车、编辑并返回购物车的克隆。这确保引用购物车的其他函数不会受到任何更改的影响。
 
 Two caveats to mention to this approach:
-这种方法要注意两点:
+注意两点:
 
 1. There might be cases where you actually want to modify the input object, but when you adopt this programming practice you will find that those cases are pretty rare. Most things can be refactored to have no side effects! (see [pure function](https://en.wikipedia.org/wiki/Pure_function))
 
-1. 在某些情况下，您可能确实想要修改输入对象，但是当您采用这种编程实践时，您会发现这种情况非常少见。大多数东西都可以重构，没有副作用！(见[纯函数](https://en.wikipedia.org/wiki/Pure_function))
+1. 在某些情况下，您可能确实想要修改输入对象，这种情况非常少见。大多数都可以重构到没有副作用！(见[纯函数](https://en.wikipedia.org/wiki/Pure_function))
 
 2. Cloning big objects can be very expensive in terms of performance. Luckily, this isn't a big issue in practice because there are great libraries that allow this kind of programming approach to be fast and not as memory intensive as it would be for you to manually clone objects and arrays.
 
-2. 性能方面，克隆大对象代价比较大。幸运的是，有一些很好的库提供了一些方法，高效快速且不像手动克隆对象和数组那样占用大量内存。
+2. 性能方面，克隆大对象代价确实比较大。还好有一些很好的库，它提供了一些高效快速的方法，且不像手动克隆对象和数组那样占用大量内存。
 
 
 **反例:**
@@ -968,11 +941,12 @@ function addItemToCart(cart: CartItem[], item:Item):CartItem[] {
 **[⬆ 回到顶部](#目录)**
 
 ### 不要写全局函数
-Don't write to global functions
 
-Polluting globals is a bad practice in JavaScript because you could clash with another library and the user of your API would be none-the-wiser until they get an exception in production. Let's think about an example: what if you wanted to extend JavaScript's native Array method to have a diff method that could show the difference between two arrays? You could write your new function to the `Array.prototype`, but it could clash with another library that tried to do the same thing. What if that other library was just using `diff` to find the difference between the first and last elements of an array? This is why it would be much better to just use classes and simply extend the `Array` global.
+在 JavaScript 中污染全局是一个非常不好的实践，这么做可能和其他库起冲突，且调用你的 API 的用户在实际环境中得到一个 exception 前对这一情况是一无所知的。
 
-污染全局变量在JavaScript中是一种不好的做法，因为您可能与另一个库发生冲突，而您的API的用户在生产环境中获得异常之前是不会知道的。让我们考虑一个例子:如果您想要扩展JavaScript的原生数组方法，使其具有一个可以显示两个数组之间差异的diff方法，该怎么办?可以将新函数写入数组。原型，但它可能与另一个尝试做同样事情的库冲突。如果另一个库只是使用diff来查找数组的第一个元素和最后一个元素之间的区别呢?这就是为什么只使用类并简单地扩展数组全局变量会更好的原因。
+考虑这样一个例子：如果您想要扩展 JavaScript 的 `Array`，使其拥有一个可以显示两个数组之间差异的 diff 方法，该怎么做呢？可以将新函数写入`Array.prototype` ，但它可能与另一个尝试做同样事情的库冲突。如果另一个库只是使用`diff`来查找数组的第一个元素和最后一个元素之间的区别呢？
+
+更好的做法是扩展`Array`，实现对应的函数功能。
 
 **反例:**
 
@@ -1023,8 +997,6 @@ class MyArray<T> extends Array<T> {
 **[⬆ 回到顶部](#目录)**
 
 ### 函数式编程优于命令式编程
-
-Favor this style of programming when you can.
 
 尽量使用函数式编程！
 
@@ -1114,7 +1086,7 @@ const totalOutput = contributions
 
 **[⬆ 回到顶部](#目录)**
 
-### 封装条件
+### 封装判断条件
 
 **反例:**
 
@@ -1148,8 +1120,7 @@ if (canActivateService(subscription, account)) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 避免负条件 
-Avoid negative conditionals
+### 避免“否定”的判断
 
 **反例:**
 
@@ -1189,13 +1160,11 @@ if (!isEmailUsed(node)) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 避免条件
+### 避免判断条件
 
-This seems like an impossible task. Upon first hearing this, most people say, "how am I supposed to do anything without an `if` statement?" The answer is that you can use polymorphism to achieve the same task in many cases. The second question is usually, *"well that's great but why would I want to do that?"* The answer is a previous clean code concept we learned: a function should only do one thing. When you have classes and functions that have `if` statements, you are telling your user that your function does more than one thing. Remember, just do one thing.
-
-这似乎是一项不可能完成的任务。
-第一次听到这个，大多数人会说，“如果没有if语句，我该怎么做呢？”答案是，在多数情况下，您可以使用多态性来完成相同的任务。
-第二个问题通常是，“这很好，但我为什么要这么做？”答案是，我们之前学过的一个概念:函数应该只做一件事。当你的类和函数有if语句时，你是在告诉你的用户你的函数不止做一件事。记住，函数只做一件事！
+这看起来似乎不太可能完成啊。
+大多数人听到后第一反应是，“没有if语句怎么实现功能呢？”在多数情况下，可以使用多态性来实现相同的功能。
+接下来的问题是“为什么要这么做？”原因就是之前提到的：函数只做一件事。
 
 **反例:**
 
@@ -1287,9 +1256,7 @@ class Cessna extends Airplane {
 
 ### 避免类型检查
 
-TypeScript is a strict syntactical superset of JavaScript and adds optional static type checking to the language.Always prefer to specify types of variables, parameters and return values to leverage the full power of TypeScript features.It makes refactoring more easier.
-
-TypeScript是JavaScript的一个严格的语法超集，它向语言中添加了可选的静态类型检查。指定变量、参数和返回值的类型，以充分利用TypeScript特性的强大功能。它使得重构更容易。
+TypeScript是JavaScript的一个严格的语法超集，具有静态类型检查的特性。所以指定变量、参数和返回值的类型，以充分利用TypeScript的这个特性，它让重构更容易。
 
 **反例:**
 
@@ -1329,9 +1296,7 @@ function travelToTexas(vehicle: Vehicle) {
 
 ### 不要过度优化
 
-Modern browsers do a lot of optimization under-the-hood at runtime. A lot of times, if you are optimizing then you are just wasting your time. There are good [resources](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers) for seeing where optimization is lacking. Target those in the meantime, until they are fixed if they can be.
-
-现代浏览器在运行时进行大量的底层优化。很多时候，如果你再优化那只是在浪费时间。有很好的[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以定位哪里需要优化，找到这些地方，修复它。
+现代浏览器在运行时进行大量的底层优化。很多时候，你做的优化只是在浪费时间。这些优秀[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以帮助确定哪里需要优化，找到并修复它。
 
 **反例:**
 
@@ -1365,9 +1330,7 @@ for (let i = 0; i < list.length; i++) {
 
 ### 删除无用代码
 
-Dead code is just as bad as duplicate code. There's no reason to keep it in your codebase.If it's not being called, get rid of it! It will still be safe in your version history if you still need it.
-
-无用代码和重复代码一样糟糕，没有理由把它保存在代码库中。如果它没有被调用，请删除它！如果您仍然需要它，它在您的版本历史等待着您。
+无用代码和重复代码一样无需保留。如果没有地方调用它，请删除！如果您仍然需要它，它会在您的版本历史等待着您。
 
 **反例:**
 
