@@ -1,4 +1,4 @@
-# TypeScript代码整洁之道
+# TypeScript 代码整洁之道
 本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简，让国内程序员可更快速阅读和学习。
 
 ## 目录
@@ -20,11 +20,11 @@
 
 这不是TypeScript编码规范，是将Robert C. Martin的[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)应用到TypeScript上，指导如何使用TypeScript编写[易读、可重用和可重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-并不是每一个原则都必须严格遵守，能得到普遍认同的原则就更少了。这虽然只是指导，没有其他内容，但却是*Clean Code*作者多年经验的总结。
+并不是每一个原则都必须严格遵守，能得到普遍认同的原则就更少了。这虽然只是一些指导，但却是*Clean Code*作者多年经验的总结。
 
 软件工程技术已经有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队的JavaScript代码质量的试金石。
 
-还有件事：理解这些原则不会立即让您成为更好的程序员，也不意味着工作多年不会犯错。每一段代码都是从不完美开始的，通过走查，我们把不完美的地方剔除，就像湿粘土最终成形一样，不要因为需要不断改进而自责!
+还有件事：理解这些原则不会立即让您成为优秀的程序员，也不意味着工作多年不会犯错。每一段代码都是从不完美开始的，通过走查，我们把不完美的地方剔除，就像湿粘土最终成形一样!
 
 
 **[⬆ 回到顶部](#目录)**
@@ -307,11 +307,9 @@ function loadPages(count: number = 10) {
 
 1. 当有人查看函数签名时，会立即清楚使用了哪些属性。
 
-2. Destructuring also clones the specified primitive values of the argument object passed into the function. This can help prevent side effects. Note: objects and arrays that are destructured from the argument object are NOT cloned
+2. 解构对传递给函数的参数对象做深拷贝，这可预防副作用。(注意：**不会克隆**从参数对象中解构的对象和数组)
 
-解构对传递给函数的参数对象做深拷贝，这可预防副作用。(注意：**不会克隆**从参数对象中解构的对象和数组)
-
-3. TypeScript会对未使用的属性显示警告。
+3. TypeScript 会对未使用的属性显示警告。
 
 **反例:**
 
@@ -573,11 +571,9 @@ function parse(tokens: Token[]): SyntaxTree {
 避免重复代码，重复乃万恶之源！重复意味着如果您要修改某种逻辑，需要修改多处代码:cry:。
 想象一下，如果你经营一家餐厅，你要记录你的库存:所有的西红柿、洋葱、大蒜、香料等等。如果有多个库存列表，那维护起来是多么痛苦!
 
-Oftentimes you have duplicate code because you have two or more slightly different things, that share a lot in common, but their differences force you to have two or more separate functions that do much of the same things. Removing duplicate code means creating an abstraction that can handle this set of different things with just one function/module/class.  
+存在重复代码，是因为有两个或两个以上很近似的功能，只有一点不同，但是这些不同迫使你用多个独立的函数来做很多几乎相同的事情。删除重复代码，则意味着创建一个抽象，该抽象仅用一个函数/模块/类就可以处理这组不同的东西。
 
-存在重复代码，是因为有两个或两个以上很近似的功能，只有一点点不同，但是这些不同迫使你用多个独立的函数来做很多几乎相同的事情。删除重复代码，则意味着创建一个抽象，该抽象仅用一个函数/模块/类就可以处理这组不同的东西。
-
-合理的抽象至关重要，这就是为什么您应该遵循[SOLID原则](#SOLID原则)。糟糕的抽象可能还不如重复代码，所以要小心！话虽如此，如果能做好抽象那就去做吧！尽量不要重复。
+合理的抽象至关重要，这就是为什么您应该遵循[SOLID原则](#SOLID原则)。糟糕的抽象可能还不如重复代码，所以要小心！话虽如此，还是要做好抽象！尽量不要重复。
 
 **反例:**
 
@@ -701,9 +697,7 @@ function showEmployeeList(employee: Developer | Manager) {
 
 ```
 
-You should be critical about code duplication. Sometimes there is a tradeoff between duplicated code and increased complexity by introducing unnecessary abstraction. When two implementations from two different modules look similar but live in different domains, duplication might be acceptable and preferred over extracting the common code. The extracted common code in this case introduces an indirect dependency between the two modules.
-
-您应当对复制代码持批评态度。有时，在重复代码和引入不必要的抽象而增加的复杂性之间，需要做权衡。当来自两个不同模块的两个实现看起来相似，但位于不同领域，复制也是可以接受的，并且比抽取公共代码要好一点。在本例中，抽取的公共代码导致两个模块之间产生间接的依赖关系。
+您应当对复制代码持批评态度。有时，在重复代码和引入不必要的抽象而增加的复杂性之间，需要做权衡。当来自不同领域的两个不同模块的实现看起来相似，复制也是可以接受的，并且比抽取公共代码要好一点。因为抽取的公共代码导致两个模块之间产生间接的依赖关系。
 
 
 **[⬆ 回到顶部](#目录)**
@@ -890,26 +884,15 @@ console.log(name);
 
 ### 避免副作用 (part2)
 
-In JavaScript, primitives are passed by value and objects/arrays are passed by reference. In the case of objects and arrays, if your function makes a change in a shopping cart array, for example, by adding an item to purchase, then any other function that uses that cart array will be affected by this addition. That may be great, however it can be bad too. Let's imagine a bad situation:  
-
-在JavaScript中，原类型是值传递，对象、数组是引用传递。有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加操作的影响。这也许是好事，但也可能是坏事。让我们想象一个糟糕的情况:
-
-The user clicks the "Purchase", button which calls a purchase function that spawns a network request and sends the cart array to the server. Because of a bad network connection, the purchase function has to keep retrying the request. Now, what if in the meantime the user accidentally clicks "Add to Cart" button on an item they don't actually want before the network request begins? If that happens and the network request begins, then that purchase function will send the accidentally added item because it has a reference to a shopping cart array that the *addItemToCart* function modified by adding an unwanted item.  
+在 JavaScript 中，原类型是值传递，对象、数组是引用传递。有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加操作的影响。这也许是好事，但也可能是坏事。让我们想象一个糟糕的情况:
 
 用户点击“购买”按钮，该按钮调用购买函数，函数请求网络并将购物车数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始前不小心点击了某个不想要的项目上的“Add to Cart”按钮，该怎么办？如果发生这种情况，并且网络请求开始，那么purchase函数将发送意外添加的项，因为它引用了一个购物车数组，addItemToCart函数通过添加不需要的项修改了该数组。
 
-A great solution would be for the *addItemToCart* to always clone the cart, edit it, and return the clone. This ensures that no other functions that are holding onto a reference of the shopping cart will be affected by any changes.  
-
 一个很好的解决方案是addItemToCart总是克隆购物车、编辑并返回购物车的克隆。这确保引用购物车的其他函数不会受到任何更改的影响。
 
-Two caveats to mention to this approach:
 注意两点:
 
-1. There might be cases where you actually want to modify the input object, but when you adopt this programming practice you will find that those cases are pretty rare. Most things can be refactored to have no side effects! (see [pure function](https://en.wikipedia.org/wiki/Pure_function))
-
-1. 在某些情况下，您可能确实想要修改输入对象，这种情况非常少见。大多数都可以重构到没有副作用！(见[纯函数](https://en.wikipedia.org/wiki/Pure_function))
-
-2. Cloning big objects can be very expensive in terms of performance. Luckily, this isn't a big issue in practice because there are great libraries that allow this kind of programming approach to be fast and not as memory intensive as it would be for you to manually clone objects and arrays.
+1. 在某些情况下，您可能确实想要修改输入对象，这种情况非常少见。大多数可以重构，确保没副作用！(见[纯函数](https://en.wikipedia.org/wiki/Pure_function))
 
 2. 性能方面，克隆大对象代价确实比较大。还好有一些很好的库，它提供了一些高效快速的方法，且不像手动克隆对象和数组那样占用大量内存。
 
@@ -1256,7 +1239,7 @@ class Cessna extends Airplane {
 
 ### 避免类型检查
 
-TypeScript是JavaScript的一个严格的语法超集，具有静态类型检查的特性。所以指定变量、参数和返回值的类型，以充分利用TypeScript的这个特性，它让重构更容易。
+TypeScript 是 JavaScript 的一个严格的语法超集，具有静态类型检查的特性。所以指定变量、参数和返回值的类型，以充分利用此特性，能让重构更容易。
 
 **反例:**
 
@@ -1375,8 +1358,6 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 ## 对象和数据结构
 
 ### 使用`getters`和`setters`
-
-TypeScript supports getter/setter syntax.Using getters and setters to access data from objects that encapsulate behavior could be better that simply looking for a property on an object."Why?" you might ask. Well, here's a list of reasons:
 
 TypeScript支持getter/setter语法。使用getter和setter从对象中访问数据可能比简单地在对象上查找属性要好。为什么？原因如下:
 
