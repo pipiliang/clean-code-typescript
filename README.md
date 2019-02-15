@@ -1,5 +1,5 @@
 # TypeScript 代码整洁之道
-本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简，让国内程序员可更快速阅读和学习。
+本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简。
 
 ## 目录
   1. [简介](#简介)
@@ -1509,15 +1509,11 @@ class Circle {
 
 **[⬆ 回到顶部](#目录)**
 
-### Prefer immutability 不变性
+### 不变性
 
-TypeScript's type system allows you to mark individual properties on an interface / class as readonly. This allows you to work in a functional way (unexpected mutation is bad).  
+TypeScript 类型系统运行将接口、类上的单个属性设置为只读，能以函数的方式运行。
 
-TypeScript的类型系统允许你将接口/类上的单个属性标记为只读。这允许您以一种功能性的方式工作(意外的突变是不好的)。
-
-For more advanced scenarios there is a built-in type `Readonly` that takes a type `T` and marks all of its properties as readonly using mapped types (see [mapped types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)).
-
-对于更高级的场景，有一个内置的类型Readonly，它接受类型T并使用映射类型(参见映射类型)将其所有属性标记为只读。
+还有个高级场景，可以使用内置类型`Readonly`，它接受类型 T 并使用[映射类型](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)将其所有属性标记为只读。
 
 **反例:**
 
@@ -1557,7 +1553,7 @@ interface Config {
 
 ### 小、小、小！要事情说三遍
 
-类的大小是由它的职责来度量的。按照*单一职责原则*，一个类应该尽量小。
+类的大小是由它的职责来度量的。按照*单一职责原则*，类要尽量小。
 
 **反例:**
 
@@ -1623,11 +1619,9 @@ class Dashboard {
 
 ### 高内聚低耦合
 
-High cohesion and low coupling Cohesion defines the degree to which class members are related to each other. Ideally, all fields within a class should be used by each method. We then say that the class is maximally cohesive. In practice, this however is not always possible, nor even advisable. You should however prefer cohesion to be high.  
+内聚：定义了类成员之间相互关联的程度。理想情况下，高内聚类的每个方法都应该使用类中的所有字段，实际上这不可能也不可取。但我们依然提倡高内聚。
 
-内聚定义了类成员之间相互关联的程度。理想情况下，每个方法都应该使用类中的所有字段。然后我们说这个类是最大内聚的。然而，在实践中，这并不总是可能的，甚至是不可取的。然而，您应该更喜欢高内聚力。
-
-耦合指的是两个类之间的关联程度。如果其中一个类的更改不影响另一个类，则称为低耦合类。
+耦合：指的是两个类之间的关联程度。如果其中一个类的更改不影响另一个类，则称为低耦合类。
 
 好的软件设计具有**高内聚性**和**低耦合性**。
 
@@ -1743,27 +1737,13 @@ class UserNotifier {
 
 ### 组合大于继承
 
-Prefer composition over inheritance 
+正如”四人帮“在[设计模式](https://en.wikipedia.org/wiki/Design_Patterns)中所指出的那样，您尽可能使用组合而不是继承。组合和继承各有优劣。这个准则的主要观点是，如果你潜意识地倾向于继承，试着想想组合是否能更好地给你的问题建模，在某些情况下可以。  
 
-As stated famously in [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four, you should prefer composition over inheritance where you can. There are lots of good reasons to use inheritance and lots of good reasons to use composition. The main point for this maxim is that if your mind instinctively goes for inheritance, try to think if composition could model your problem better. In some cases it can.  
+什么时候应该使用继承？这取决于你手头的问题。以下场景使用继承比组合更好:
 
-正如“四人帮”在[设计模式](https://en.wikipedia.org/wiki/Design_Patterns)中所指出的那样，在可能的情况下，您应该更喜欢组合而不是继承。有很多好的理由使用继承，也有很多好的理由使用组合。这句格言的主要观点是，如果你的头脑本能地倾向于继承，试着想想组合是否能更好地模拟你的问题。在某些情况下可以。  
-
-You might be wondering then, "when should I use inheritance?" It depends on your problem at hand, but this is a decent list of when inheritance makes more sense than composition:
-
-您可能会想，“我什么时候应该使用继承?”这取决于你手头的问题，但这是一个不错的列表，列出了什么时候继承比组合更有意义:
-
-1. Your inheritance represents an "is-a" relationship and not a "has-a" relationship (Human->Animal vs. User->UserDetails).
-
-您的继承代表的是“is-a”关系，而不是“has-a”关系(Human->Animal vs. User->UserDetails)
-
-2. You can reuse code from the base classes (Humans can move like all animals).
-
-您可以重用基类中的代码(人类可以像所有动物一样移动)。
-
-3. You want to make global changes to derived classes by changing a base class. (Change the caloric expenditure of all animals when they move).
-
-您希望通过更改基类对派生类进行全局更改。(改变所有动物在运动时的热量消耗)。
+1. 继承代表的是“is-a”关系，而不是“has-a”关系 (人 -> 动物 vs. 用户 -> 用户详情)
+2. 可复用基类的代码 (人类可以像所有动物一样移动)。
+3. 希望通过更改基类对派生类进行全局更改。(改变所有动物在运动时的热量消耗)。
 
 **反例:**
 
@@ -1981,9 +1961,8 @@ const query = new QueryBuilder()
 
 ### 单一职责原则 (SRP)
 
-As stated in Clean Code, "There should never be more than one reason for a class to change". It's tempting to jam-pack a class with a lot of functionality, like when you can only take one suitcase on your flight. The issue with this is that your class won't be conceptually cohesive and it will give it many reasons to change. Minimizing the amount of times you need to change a class is important. It's important because if too much functionality is in one class and you modify a piece of it, it can be difficult to understand how that will affect other dependent modules in your codebase.
-
-正如**Clean Code**中所述，“类更改的原因不应该超过一个”。将一个具有很多功能的类打包在一起是很诱人的，比如当您在航班上只能带一个手提箱时。这样做的问题是，您的类在概念上不具有内聚性，而且它会给出许多更改的理由。最小化更改类所需的时间非常重要。这很重要，因为如果一个类中有太多的功能，而您修改了其中的一部分，那么很难理解这将如何影响代码库中的其他依赖模块。
+正如 Clean Code 中所述，“类更改的原因不应该超过一个”。将很多功能打包在一个类看起来很诱人，就像在航班上您只能带一个手提箱。这样带来的问题是，在概念上类不具有内聚性，且有很多原因去修改类。而我们应该尽量减少修改类的次数。
+如果一个类中有很多的功能，修改了其中一处很难确定对代码库中其他依赖模块的影响。
 
 **反例:**
 
@@ -2199,13 +2178,10 @@ class HttpRequester {
 
 ### 里氏替换原则 (LSP)
 
-This is a scary term for a very simple concept. It's formally defined as "If S is a subtype of T, then objects of type T may be replaced with objects of type S (i.e., objects of type S may substitute objects of type T) without altering any of the desirable properties of that program (correctness, task performed, etc.)." That's an even scarier definition.  
+对一个非常简单的概念来说，这是个可怕的术语。
+它的正式定义是：“如果 S 是 T 的一个子类型，那么类型 T 的对象可以被替换为类型 S 的对象，而不会改变程序的任何期望属性(正确性、执行的任务等)“。这是一个更可怕的定义。  
 
-对于一个非常简单的概念来说，这是一个可怕的术语。它的正式定义是“如果S是T的一个子类型，那么类型T的对象可以被类型S(即，类型S的对象可以替换类型T的对象)，而不会改变该程序的任何可取属性(正确性、执行的任务等)。这是一个更可怕的定义。  
-
-The best explanation for this is if you have a parent class and a child class, then the base class and child class can be used interchangeably without getting incorrect results. This might still be confusing, so let's take a look at the classic Square-Rectangle example. Mathematically, a square is a rectangle, but if you model it using the "is-a" relationship via inheritance, you quickly get into trouble.
-
-对此最好的解释是，如果您有一个父类和一个子类，那么基类和子类可以互换使用，而不会得到不正确的结果。这可能仍然令人困惑，所以让我们看一看经典的正方形矩形的例子。从数学上讲，正方形是矩形，但是如果您通过继承使用“is-a”关系对其建模，您很快就会遇到麻烦。
+对此最好的解释是，如果您有一个父类和一个子类，那么父类和子类可以互换使用，而不会得到不正确的结果。这可能仍然令人困惑，所以让我们看一看经典的正方形矩形的例子。从数学上讲，正方形是矩形，但是如果您通过继承使用 “is-a” 关系对其建模，您很快就会遇到麻烦。
 
 **反例:**
 
@@ -2375,9 +2351,7 @@ renderLargeShapes(shapes);
 
 ### 接口隔离原则 (ISP)
 
-ISP states that "Clients should not be forced to depend upon interfaces that they do not use.". This principle is very much related to the Single Responsibility Principle. What it really means is that you should always design your abstractions in a way that the clients that are using the exposed methods do not get the whole pie instead. That also include imposing the clients with the burden of implementing methods that they don’t actually need.
-
-ISP声明“客户不应该被迫依赖于他们不使用的接口。”这一原则与单一责任原则密切相关。它的真正含义是，您应该始终以一种使用公开方法的客户端无法获得整个饼图的方式来设计抽象。这还包括让客户承担实现他们实际上不需要的方法的负担。
+ISP 声明“客户不应该被迫依赖于他们不使用的接口。”这一原则与单一责任原则密切相关。否则会增加客户端的负担，因为他们需要实现一些不需要的方法。
 
 **反例:**
 
@@ -2505,25 +2479,13 @@ class EconomicPrinter implements IPrinter {
 
 ### 依赖反转原则(Dependency Inversion Principle)
 
-This principle states two essential things:
+这一原则有两个要点:
+1. 高层模块不应该依赖于低层模块，两者都应该依赖于接口。
+2. 接口应该脱离实现，实现应该依赖接口。
 
-这一原则阐述了两件基本的事情:
+一开始这难以理解，但是如果你使用过 Angular，你就会看以依赖注入(DI)的方式实现了这一原则。虽然它们不是相同的概念，但是 DIP 阻止高级模块了解其低级模块的细节并进行设置。它可以通过 DI 实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合是一种非常糟糕的开发模式，它使代码难以重构。
 
-1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
-
-1. 高级模块不应该依赖于低级模块。两者都应该依赖于抽象
-
-2. Abstractions should not depend upon details. Details should depend on abstractions.
-
-2. 抽象不应该依赖于细节。细节应该依赖于抽象。
-
-This can be hard to understand at first, but if you've worked with Angular, you've seen an implementation of this principle in the form of Dependency Injection (DI). While they are not identical concepts, DIP keeps high-level modules from knowing the details of its low-level modules and setting them up. It can accomplish this through DI. A huge benefit of this is that it reduces the coupling between modules. Coupling is a very bad development pattern because it makes your code hard to refactor.  
-
-这在一开始可能很难理解，但是如果你使用过Angular，你就会看到依赖注入(DI)的形式实现了这一原则。虽然它们不是相同的概念，但是DIP阻止高级模块了解其低级模块的细节并进行设置。它可以通过DI实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合是一种非常糟糕的开发模式，因为它使代码难以重构。
-
-DIP is usually achieved by a using an inversion of control (IoC) container. An example of a powerful IoC container for TypeScript is [InversifyJs](https://www.npmjs.com/package/inversify)
-
-DIP通常是通过使用控制反转(IoC)容器来实现的。TypeScript强大的IoC容器的一个例子是[InversifyJs](https://www.npmjs.com/package/inversify)
+DIP通常是通过使用控制反转(IoC)容器来实现的。比如：TypeScript 的IoC容器 [InversifyJs](https://www.npmjs.com/package/inversify)
 
 **反例:**
 
@@ -2653,7 +2615,7 @@ await report = await reader.read('report.json');
 
 ## 测试
 
-测试比发布(shipping)更重要。如果没有测试或数量不足，那么每次发布代码时都无法确保不引入问题。怎样才算是足够的测试数量？这取决于团队，但是拥有100%的覆盖率(所有语句和分支)会团队更有信心。这一切都要有好的测试框架以及覆盖率工具。
+测试比发货更重要。如果没有测试或数量不足，那么每次发布代码时都无法确保不引入问题。怎样才算是足够的测试数量？这取决于团队，但是拥有100%的覆盖率(所有语句和分支)会团队更有信心。这一切都要有好的测试框架以及覆盖率工具。
 
 没有任何理由不编写测试。有很多优秀的JS测试框架都支持TypeScript，找一个你的团队喜欢的。然后总是为你引入的每个新特性/模块编写测试。如果您喜欢测试驱动开发(TDD)，那就太好了，重点是确保在开发任何特性或重构现有特性之前，代码已经达到了覆盖目标。 
 
@@ -2813,13 +2775,9 @@ describe('Calendar', () => {
 
 ### 用 Promises 替代回调
 
-Callbacks aren't clean, and they cause excessive amounts of nesting *(the callback hell)*.  
-
 回调不够整洁而且会导致过多的嵌套*(回调地狱)*。
 
-There are utilities that transform existing functions using the callback style to a version that returns promises (for Node.js see [`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original), for general purpose see [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify))
-
-有些工具程序可以将现有函数转换为promise对象：
+有些工具可以将现有函数转换为promise对象：
 - Node.js 参见[`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original)
 - 通用参见[pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify)
 
@@ -2905,8 +2863,7 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
 
 ```
 
-Promises supports a few helper methods that help make code more conscise:
-Promises 有以下辅助方法：
+Promises 有以下方法：
 
 | 方法                     | 描述                                       |  
 | ------------------------ | -----------------------------------------  |  
@@ -2915,15 +2872,12 @@ Promises 有以下辅助方法：
 | `Promise.all(promises)`  | Returns a new promise which is fulfilled with an array of fulfillment values for the passed promises or rejects with the reason of the first promise that rejects. |
 | `Promise.race(promises)`|Returns a new promise which is fulfilled/rejected with the result/error of the first settled promise from the array of passed promises. |
 
-`Promise.all` is especially useful when there is a need to run tasks in parallel. `Promise.race` makes it easier to implement things like timeouts for promises.
 
 `Promise.all`在并行运行任务时尤其有用，`Promise.race`让为 Promises 实现超时变得更加容易。
 
 **[⬆ 回到顶部](#目录)**
 
-### `Async/Await`比`Promises`更好
-
-With async/await syntax you can write code that is far cleaner and more understandable that chained promises. Within a function prefixed with `async` keyword you have a way to tell the JavaScript runtime to pause the execution of code on the `await` keyword (when used on a promise).
+### `Async/Await` 比 `Promises` 更好
 
 使用async/wait语法，您可以编写更简洁、更容易理解的链式promise的代码。在一个以async关键字为前缀的函数中，您可以告诉JavaScript运行时暂停wait关键字上的代码执行(当使用 promise 时)。
 
@@ -2995,16 +2949,12 @@ try {
 
 ## 错误处理
 
-Thrown errors are a good thing! They mean the runtime has successfully identified when something in your program has gone wrong and it's letting you know by stopping function execution on the current stack, killing the process (in Node), and notifying you in the console with a stack trace.
-
 抛出错误是件好事!它们意味着运行时已经成功地识别出程序中的错误，并通过停止当前堆栈上的函数执行(在Node.js)终止进程以及在控制台中使用堆栈跟踪通知您来让您知道。
 
 ### 抛出`Error`或 reject Error
 
-JavaScript as well as TypeScript allow you to `throw` any object. A Promise can also be rejected with any reason object. It is advisable to use the `throw` syntax with an `Error` type. This is because your error might be caught in higher level code with a `catch` syntax. It would be very confusing to catch a string message there and would make [debugging more painful](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error).  For the same reason you should reject promises with `Error` types.
-
-JavaScript和TypeScript允许你`throw`任何对象。Promise也可以用任何理由对象拒绝。
-建议使用带有`Error`类型的`throw`语法。这是因为您的错误可能在具有`catch`语法的高级代码中被捕获。在那里捕获字符串消息会非常混乱，并且会使[调试更加痛苦](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error)。出于同样的原因，您应该拒绝带有`Error`类型的 promises。
+JavaScript和TypeScript允许你 `throw` 任何对象。Promise也可以用任何理由对象拒绝。
+建议使用带有 `Error` 类型的 `throw` 语法。这是因为您的错误可能在具有 `catch` 语法的高级代码中被捕获。在那里捕获字符串消息会非常混乱，并且会使[调试更加痛苦](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error)。出于同样的原因，您应该拒绝带有 `Error `类型的 promises。
 
 **反例:**
 
@@ -3050,13 +3000,9 @@ async function get(): Promise<Item[]> {
 
 ```
 
-The benefit of using `Error` types is that it is supported by the syntax `try/catch/finally` and implicitly all errors have the `stack` property which is very powerful for debugging.  
+使用 `Error` 类型的好处是 `try/catch/finally` 语法支持它，并且隐式地所有错误都具有  `stack` 属性，该属性对于调试非常强大。
 
-使用`Error`类型的好处是`try/catch/finally`语法支持它，并且隐式地所有错误都具有`stack`属性，该属性对于调试非常强大。
-
-There are also another alternatives, not to use the `throw` syntax and instead always return custom error objects. TypeScript makes this even easier. Consider following example:
-
-还有另一种选择，即不使用`throw`语法，而总是返回自定义错误对象。TypeScript在这块更容易。考虑下面的例子:
+还有另一种选择，即不使用 `throw` 语法，而总是返回自定义错误对象。TypeScript在这块更容易。考虑下面的例子:
 
 ```ts
 
@@ -3090,17 +3036,13 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 
 ```
 
-For the detailed explanation of this idea refer to the [original post](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9).
-
 关于这个想法的详细解释，请参考[原文](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9)。
 
 **[⬆ 回到顶部](#目录)**
 
 ### 别忘了捕获错误
 
-Doing nothing with a caught error doesn't give you the ability to ever fix or react to said error. Logging the error to the console (`console.log`) isn't much better as often times it can get lost in a sea of things printed to the console. If you wrap any bit of code in a `try/catch` it means you think an error may occur there and therefore you should have a plan, or create a code path, for when it occurs.
-
-对捕获的错误不做任何处理并不会使您能够修复或对所述错误作出反应。将错误记录到控制台(console.log)也好不到哪里去，因为它常常会在打印到控制台的大量内容中丢失。如果您在`try/catch`中包装任何代码，这意味着您认为那里可能会发生错误，因此您应该有一个计划，或创建一个代码路径，以便在发生错误时使用。
+对捕获的错误不做任何处理并不会使您能够修复或对所述错误作出反应。将错误记录到控制台(console.log)也好不到哪里去，因为它常常会在打印到控制台的大量内容中丢失。如果您在     `try/catch` 中包装任何代码，这意味着您认为那里可能会发生错误，因此您应该有一个计划，或创建一个代码路径，以便在发生错误时使用。
 
 **反例:**
 
@@ -3298,10 +3240,7 @@ Prefer using `camelCase` for variables, functions and class members.
 
 ### 调用函数的函数和被调函数应放在较近的位置
 
-If a function calls another, keep those functions vertically close in the source file. Ideally, keep the caller right above the callee. We tend to read code from top-to-bottom, like a newspaper. Because of this, make your code read that way.
-
-当函数间存在相互调用的情况时，应将两者置于较近的位置。理想情况下，应将调用其他函数的函数写在被调用函数的上方。
-我们倾向于从头到尾阅读代码，就像报纸一样。因此，让您的代码以这种方式读取。
+当函数间存在相互调用的情况时，应将两者置于较近的位置。理想情况下，应将调用其他函数的函数写在被调用函数的上方。我们倾向于从头到尾阅读代码，就像报纸一样。因此，让您的代码以这种方式读取。
 
 **反例:**
 
@@ -3431,8 +3370,6 @@ review.review();
 
 ### 类型 vs 接口
 
-Use type when you might need a union or intersection. Use interface when you want `extends` or `implements`. There is no strict rule however, use the one that works for you.  
-
 当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，使用适合你的规则。
 
 参考这个关于Typescript中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
@@ -3511,8 +3448,6 @@ class Square implements Shape {
 
 ## 注释
 
-The use of a comments is an indication of failure to express without them. Code should be the only source of truth.
-
 使用注释说明没有注释就无法表达。代码应该是真理的唯一来源。
 
 > Don’t comment bad code—rewrite it.  
@@ -3520,7 +3455,6 @@ The use of a comments is an indication of failure to express without them. Code 
 
 ### 代码应该自解释而不是注释
 
-Comments are an apology, not a requirement. 
 好代码即文档。
 
 **反例:**
@@ -3546,6 +3480,7 @@ if (isSubscriptionActive) { /* ... */ }
 **[⬆ 回到顶部](#目录)**
 
 ### 不要将注释掉的代码留在代码库中
+
 版本控制存在的一个理由，就是让旧代码成为历史。
 
 **反例:**
