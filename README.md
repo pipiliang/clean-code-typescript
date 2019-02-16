@@ -13,14 +13,15 @@
   9. [错误处理](#错误处理)
   10. [格式化](#格式化)
   11. [注释](#注释)
+  12. 翻译
 
 ## 简介
 
 ![Humorous image of software quality estimation as a count of how many expletives you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
-这不是TypeScript编码规范，是将Robert C. Martin的[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)应用到TypeScript上，指导如何使用TypeScript编写[易读、可重用和可重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
+这不是 TypeScript 编码规范，是将 Robert C. Martin 的[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)应用到 TypeScript 上，指导如何使用 TypeScript 编写[易读、可重用和可重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-并不是每一个原则都必须严格遵守，能得到普遍认同的原则就更少了。这虽然只是一些指导，但却是*Clean Code*作者多年经验的总结。
+并不是每个原则都必须严格遵守，能得到普遍认同的原则就更少了。这虽然只是一些指导，但却是*Clean Code*作者多年经验的总结。
 
 软件工程技术已经有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队的JavaScript代码质量的试金石。
 
@@ -99,7 +100,7 @@ class Customer {
 
 **[⬆ 回到顶部](#目录)**
 
-### 对功能类似的变量名采用统一的命名风格
+### 对功能一致的变量名采用统一的命名
 
 **反例:**
 
@@ -183,7 +184,7 @@ for (const [id, user] of users) {
 
 **[⬆ 回到顶部](#目录)**
 
-### 避免思维映射，避免缩写
+### 避免思维映射
 
 不要让人去猜测或想象变量的含义，*明确是王道.*
 
@@ -213,9 +214,9 @@ const transaction = charge(user, subscription);
 
 **[⬆ 回到顶部](#目录)**
 
-### 避免重复描述
+### 不添加无用的上下文
 
-如果您的类名或对象名已经表达了某种信息，在内部变量名中不要再重复表达。
+如果您的类名或对象名已经表达了某些信息，在内部变量名中不要再重复表达。
 
 **反例:**
 
@@ -263,7 +264,7 @@ function print(car: Car): void {
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用默认参数，而不是短路或条件
+### 使用默认参数，而不是短路或条件判断
 
 默认参数通常比短路更干净。
 
@@ -1355,6 +1356,89 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 **[⬆ 回到顶部](#目录)**
 
+### Use iterators and generators
+
+Use generators and iterables when working with collections of data used like a stream.  
+There are some good reasons:
+
+- decouples the callee from the generator implementation in a sense that callee decides how many
+items to access
+- lazy execution, items are streamed on demand
+- built-in support for iterating items using the `for-of` syntax
+- iterables allow to implement optimized iterator patterns
+
+**Bad:**
+
+```ts
+function fibonacci(n: number): number[] {
+  if (n === 1) return [0];
+  if (n === 2) return [0, 1];
+
+  const items: number[] = [0, 1];
+  while (items.length < n) {
+    items.push(items[items.length - 2] + items[items.length - 1]);
+  }
+
+  return items;
+}
+
+function print(n: number) {
+  fibonacci(n).forEach(fib => console.log(fib));
+}
+
+// Print first 10 Fibonacci numbers.
+print(10);
+```
+
+**Good:**
+
+```ts
+// Generates an infinite stream of Fibonacci numbers.
+// The generator doesn't keep the array of all numbers.
+function* fibonacci(): IterableIterator<number> {
+  let [a, b] = [0, 1];
+
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+function print(n: number) {
+  let i = 0;
+  for (const fib in fibonacci()) {
+    if (i++ === n) break;  
+    console.log(fib);
+  }  
+}
+
+// Print first 10 Fibonacci numbers.
+print(10);
+```
+
+There are libraries that allow working with iterables in a similar way as with native arrays, by
+chaining methods like `map`, `slice`, `forEach` etc. See [itiriri](https://www.npmjs.com/package/itiriri) for
+an example of advanced manipulation with iterables (or [itiriri-async](https://www.npmjs.com/package/itiriri-async) for manipulation of async iterables).
+
+```ts
+import itiriri from 'itiriri';
+
+function* fibonacci(): IterableIterator<number> {
+  let [a, b] = [0, 1];
+ 
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+itiriri(fibonacci())
+  .take(10)
+  .forEach(fib => console.log(fib));
+```
+
+**[⬆ 回到顶部](#目录)**
+
 ## 对象和数据结构
 
 ### 使用`getters`和`setters`
@@ -1548,6 +1632,85 @@ interface Config {
 ```
 
 **[⬆ 回到顶部](#目录)**
+
+### 类型 vs 接口
+
+当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，使用适合你的规则。
+
+参考这个关于Typescript中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
+
+**反例:**
+
+```ts
+
+interface EmailConfig {
+
+  // ...
+
+}
+
+interface DbConfig {
+
+  // ...
+
+}
+
+interface Config {
+
+  // ...
+
+}
+
+//...
+
+type Shape {
+
+  // ...
+
+}
+
+```
+
+**正例:**
+
+```ts
+
+type EmailConfig {
+
+  // ...
+
+}
+
+type DbConfig {
+
+  // ...
+
+}
+
+type Config  = EmailConfig | DbConfig;
+
+// ...
+
+interface Shape {
+
+}
+
+class Circle implements Shape {
+
+  // ...
+
+}
+
+class Square implements Shape {
+
+  // ...
+
+}
+
+```
+
+**[⬆ 回到顶部](#目录)**
+
 
 ## 类
 
@@ -2951,7 +3114,7 @@ try {
 
 抛出错误是件好事!它们意味着运行时已经成功地识别出程序中的错误，并通过停止当前堆栈上的函数执行(在Node.js)终止进程以及在控制台中使用堆栈跟踪通知您来让您知道。
 
-### 抛出`Error`或 reject Error
+### 抛出`Error`或 reject `Error`
 
 JavaScript和TypeScript允许你 `throw` 任何对象。Promise也可以用任何理由对象拒绝。
 建议使用带有 `Error` 类型的 `throw` 语法。这是因为您的错误可能在具有 `catch` 语法的高级代码中被捕获。在那里捕获字符串消息会非常混乱，并且会使[调试更加痛苦](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error)。出于同样的原因，您应该拒绝带有 `Error `类型的 promises。
@@ -3368,83 +3531,86 @@ review.review();
 
 **[⬆ 回到顶部](#目录)**
 
-### 类型 vs 接口
+### 组织导入
 
-当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，使用适合你的规则。
+使用干净且易于阅读的`import`语句，您可以快速查看当前代码的依赖关系。确保你对`import`语句采用以下良好的做法:
 
-参考这个关于Typescript中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
+- Import语句应该按字母顺序排列和分组。
+- 应该删除未使用的导入。
+- 命名导入必须按字母顺序(例如：`import {A, B, C} from 'foo';`)。
+- 导入源必须在组中按字母顺序排列。 例如: `import * as foo from 'a'; import * as bar from 'b';`
+- 导入组由空白行划分。
+- 组内按照如下排序:
+  - Polyfills (例如: `import 'reflect-metadata';`)
+  - Node 内置模块 (例如: `import fs from 'fs';`)
+  - 外部模块 (例如: `import { query } from 'itiriri';`)
+  - 内部模块 (例如: `import { UserService } from 'src/services/userService';`)
+  - 父目录中的模块 (例如: `import foo from '../foo'; import qux from '../../foo/qux';`)
+  - 来自相同或兄弟目录的模块 (例如: `import bar from './bar'; import baz from './bar/baz';`)
 
 **反例:**
 
 ```ts
-
-interface EmailConfig {
-
-  // ...
-
-}
-
-interface DbConfig {
-
-  // ...
-
-}
-
-interface Config {
-
-  // ...
-
-}
-
-//...
-
-type Shape {
-
-  // ...
-
-}
-
+import { TypeDefinition } from '../types/typeDefinition';
+import { AttributeTypes } from '../model/attribute';
+import { ApiCredentials, Adapters } from './common/api/authorization';
+import fs from 'fs';
+import { ConfigPlugin } from './plugins/config/configPlugin';
+import { BindingScopeEnum, Container } from 'inversify';
+import 'reflect-metadata';
 ```
 
 **正例:**
 
 ```ts
+import 'reflect-metadata';
 
-type EmailConfig {
+import fs from 'fs';
+import { BindingScopeEnum, Container } from 'inversify';
 
-  // ...
+import { AttributeTypes } from '../model/attribute';
+import { TypeDefinition } from '../types/typeDefinition';
 
-}
-
-type DbConfig {
-
-  // ...
-
-}
-
-type Config  = EmailConfig | DbConfig;
-
-// ...
-
-interface Shape {
-
-}
-
-class Circle implements Shape {
-
-  // ...
-
-}
-
-class Square implements Shape {
-
-  // ...
-
-}
-
+import { ApiCredentials, Adapters } from './common/api/authorization';
+import { ConfigPlugin } from './plugins/config/configPlugin';
 ```
 
 **[⬆ 回到顶部](#目录)**
+
+### 使用 typescript 别名
+
+通过在`tsconfig.json`的编译器选项部分中定义路径和baseUrl属性来创建更漂亮的导入。
+
+这将避免导入时使用较长的相对路径。
+
+**反例:**
+
+```ts
+import { UserService } from '../../../services/UserService';
+```
+
+**正例:**
+
+```ts
+import { UserService } from '@services/UserService';
+```
+
+```js
+// tsconfig.json
+...
+  "compilerOptions": {
+    ...
+    "baseUrl": "src",
+    "paths": {
+      "@services": ["services/*"]
+    }
+    ...
+  }
+...
+```
+
+**[⬆ 回到顶部](#目录)**
+
 
 ## 注释
 
@@ -3455,7 +3621,7 @@ class Square implements Shape {
 
 ### 代码应该自解释而不是注释
 
-好代码即文档。
+代码即文档。
 
 **反例:**
 
@@ -3655,5 +3821,31 @@ class Client {
 
 ```
 
+
+**[⬆ 回到顶部](#目录)**
+
+### TODO 注释 
+
+当您发现自己需要在代码中留下注释以供以后进行改进时，使用`// TODO`注释。大多数IDE都对这类注释提供了特殊的支持你可以快速浏览整个待办事项列表。
+
+但是请记住**TOD**注释并不是错误代码的借口。
+
+**反例:**
+
+```ts
+function getActiveSubscriptions(): Promise<Subscription[]> {
+  // ensure `dueDate` is indexed.
+  return db.subscriptions.find({ dueDate: { $lte: new Date() } });
+}
+```
+
+**正例:**
+
+```ts
+function getActiveSubscriptions(): Promise<Subscription[]> {
+  // TODO: ensure `dueDate` is indexed.
+  return db.subscriptions.find({ dueDate: { $lte: new Date() } });
+}
+```
 
 **[⬆ 回到顶部](#目录)**
