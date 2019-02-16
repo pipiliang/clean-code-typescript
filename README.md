@@ -1,5 +1,5 @@
 # TypeScript 代码整洁之道
-本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译以及精简。
+本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译及精简。由于个人水平有限，如有存在错误之处烦请指明!
 
 ## 目录
   1. [简介](#简介)
@@ -19,13 +19,13 @@
 
 ![Humorous image of software quality estimation as a count of how many expletives you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
-这不是 TypeScript 编码规范，是将 Robert C. Martin 的[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)应用到 TypeScript 上，指导如何使用 TypeScript 编写[易读、可重用和可重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
+这不是 TypeScript 的编码规范，而是将 Robert C. Martin 的软件工程著作 [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) 适用到 TypeScript，指导如何使用 TypeScript 编写[易读、可复用和易重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-并不是每个原则都必须严格遵守，能得到普遍认同的原则就更少了。这虽然只是一些指导，但却是*Clean Code*作者多年经验的总结。
+并不是每个原则都要严格遵守，能被普遍认同的原则就更少了。虽然只是一些指导，但却是*Clean Code*作者对多年编码经验的总结及凝练。
 
-软件工程技术已经有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队的JavaScript代码质量的试金石。
+软件工程技术已有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队代码质量的试金石。
 
-还有件事：理解这些原则不会立即让您成为优秀的程序员，也不意味着工作多年不会犯错。每一段代码都是从不完美开始的，通过走查，我们把不完美的地方剔除，就像湿粘土最终成形一样!
+另外，理解这些原则不会立即让您成为优秀的程序员，也不意味着工作多年不会犯错。每一段代码都是从不完美开始的，通过走查不断趋于完美，就像黏土制作成陶艺一样，享受这个过程吧!
 
 
 **[⬆ 回到顶部](#目录)**
@@ -34,7 +34,7 @@
 
 ### 变量名要有意义
 
-做有意义的区分，让读者更容易理解变量的不同。
+做有意义的区分，让读者更容易理解变量的含义。
 
 **反例:**
 
@@ -64,7 +64,7 @@ function between<T>(value: T, left: T, right: T) {
 
 ### 变量名可拼读出来
 
-如果你不能读出它，你在讨论它时听起来就会像个傻帽。
+如果你不能读出它，你在讨论它时听起来就会像个白痴。
 
 **反例:**
 
@@ -100,7 +100,7 @@ class Customer {
 
 **[⬆ 回到顶部](#目录)**
 
-### 对功能一致的变量名采用统一的命名
+### 对功能一致的变量采用统一命名
 
 **反例:**
 
@@ -126,7 +126,7 @@ function getUser(): User;
 
 ### 变量名可检索
 
-我们读代码比写的要多，代码的易读性和可检索非常重要。如果不抽取并命名变量，那就是坑阅读代码的人。要命名这样就可检索，像[TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) 这样的工具可以帮助识别未命名的常量。
+我们读代码要比写的多，所以易读性和可检索非常重要。如果不抽取并命名有意义的变量名，那就是坑读代码的人。代码要可检索，像[TSLint](https://palantir.github.io/tslint/rules/no-magic-numbers/) 就可以帮助识别未命名的常量。
 
 **反例:**
 
@@ -216,7 +216,7 @@ const transaction = charge(user, subscription);
 
 ### 不添加无用的上下文
 
-如果您的类名或对象名已经表达了某些信息，在内部变量名中不要再重复表达。
+如果类名或对象名已经表达了某些信息，在内部变量名中不要再重复表达。
 
 **反例:**
 
@@ -264,9 +264,9 @@ function print(car: Car): void {
 
 **[⬆ 回到顶部](#目录)**
 
-### 使用默认参数，而不是短路或条件判断
+### 使用默认参数，而非短路或条件判断
 
-默认参数通常比短路更干净。
+通常，默认参数比短路更整洁。
 
 **反例:**
 
@@ -296,15 +296,14 @@ function loadPages(count: number = 10) {
 
 **[⬆ 回到顶部](#目录)**
 
-
-
 ## 函数
 
 ### 参数越少越好 (理想情况不超过2个)
 
-要限制参数个数，这样函数测试会更容易。超过三个参数会导致测试复杂度激增，需要测试众多不同参数的组合场景。
-理想情况，只有一两个参数，尽量避免三个参数。如果您有两个以上的参数，那么您的函数就复杂了。
-如果需要很多参数，请您考虑使用对象。为了使函数的属性更清晰，可以使用[解构](https://basarat.gitbooks.io/typescript/docs/destructuring.html)，它有几个优点：
+限制参数个数，这样函数测试会更容易。超过三个参数会导致测试复杂度激增，需要测试众多不同参数的组合场景。
+理想情况，只有一两个参数。如果有两个以上的参数，那么您的函数可能就太过复杂了。
+
+如果需要很多参数，请您考虑使用对象。为了使函数的属性更清晰，可以使用[解构](https://basarat.gitbooks.io/typescript/docs/destructuring.html)，它有以下优点：
 
 1. 当有人查看函数签名时，会立即清楚使用了哪些属性。
 
@@ -349,7 +348,7 @@ createMenu({
 });
 
 ```
-通过 TypeScript's [类型别名](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)，您可以进一步提高可读性。
+通过 TypeScript 的[类型别名](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)，可以进一步提高可读性。
 
 ```ts
 
@@ -379,7 +378,7 @@ createMenu({
 
 ### 只做一件事
 
-这是目前为止软件工程中最重要的规则。当函数做不止一件事时，它就更难组合、测试以及理解。当您的函数只有一个行为，它就更易于重构、代码就更清晰。如果您只从本指南中了解到这一点，那么您已超过多数程序员了。
+这是目前软件工程中最重要的规则。如果函数做不止一件事，它就更难组合、测试以及理解。反之，函数只有一个行为，它就更易于重构、代码就更清晰。如果您只从本指南中了解到这一点，那么您就超过多数程序员了。
 
 **反例:**
 
@@ -427,7 +426,7 @@ function isActiveClient(client: Client) {
 
 ### 名副其实
 
-从函数名就可了解函数的功能。
+函数名就可以展示出函数实现的功能。
 
 **反例:**
 
@@ -467,7 +466,7 @@ addMonthToDate(date, 1);
 
 ### 每个函数只包含同一个层级的抽象
 
-当有多个抽象级别时，您的函数应该是做得太多事了。拆分函数以便可重用、也让测试更容易。
+当有多个抽象级别时，函数应该是做得太多事了。拆分函数以便可复用，也让测试更容易。
 
 **反例:**
 
@@ -569,8 +568,8 @@ function parse(tokens: Token[]): SyntaxTree {
 
 ### 删除重复代码
 
-避免重复代码，重复乃万恶之源！重复意味着如果您要修改某种逻辑，需要修改多处代码:cry:。
-想象一下，如果你经营一家餐厅，你要记录你的库存:所有的西红柿、洋葱、大蒜、香料等等。如果有多个库存列表，那维护起来是多么痛苦!
+重复乃万恶之源！重复意味着如果要修改某个逻辑，需要修改多处代码:cry:。
+想象一下，如果你经营一家餐厅，要记录你的库存:所有的西红柿、洋葱、大蒜、香料等等。如果有多个库存列表，那维护起来是多么痛苦!
 
 存在重复代码，是因为有两个或两个以上很近似的功能，只有一点不同，但是这些不同迫使你用多个独立的函数来做很多几乎相同的事情。删除重复代码，则意味着创建一个抽象，该抽象仅用一个函数/模块/类就可以处理这组不同的东西。
 
@@ -698,7 +697,7 @@ function showEmployeeList(employee: Developer | Manager) {
 
 ```
 
-您应当对复制代码持批评态度。有时，在重复代码和引入不必要的抽象而增加的复杂性之间，需要做权衡。当来自不同领域的两个不同模块的实现看起来相似，复制也是可以接受的，并且比抽取公共代码要好一点。因为抽取的公共代码导致两个模块之间产生间接的依赖关系。
+应该对复制代码持批评态度。有时，在重复代码和引入不必要的抽象而增加的复杂性之间，需要做权衡。当来自不同领域的两个不同模块的实现看起来相似，复制也是可以接受的，并且比抽取公共代码要好一点。因为抽取公共代码导致两个模块产生间接的依赖关系。
 
 
 **[⬆ 回到顶部](#目录)**
@@ -781,7 +780,7 @@ createMenu({ body: 'Bar' });
 
 ```
 
-为了避免副作用，可以设置TypeScript编译器，不允许显式传递`undefined`或`null`值。参见TypeScript中的`--strictnullcheck`选项。
+为了避免副作用，不允许显式传递`undefined`或`null`值。参见 TypeScript 编译器的`--strictnullcheck`选项。
 
 **[⬆ 回到顶部](#目录)**
 
@@ -831,9 +830,9 @@ function createTempFile(name:string) {
 
 ### 避免副作用 (part1)
 
-当函数产生了除了“接受一个值并返回一个结果”之外的行为时，称该函数产生了副作用。比如写文件、修改全局变量或将你的钱全转给了一个陌生人等。
+当函数产生除了“一个输入一个输出”之外的行为时，称该函数产生了副作用。比如写文件、修改全局变量或将你的钱全转给了一个陌生人等。
 
-程序在某些情况下确实需要副作用这一行为，如先前例子中的写文件。这时应该将这些功能集中在一起，不要用多个函数/类修改某个文件。用且只用一个 service 完成这一需求。
+在某些情况下，程序确实需要有副作用。如先前例子中的写文件，这时应该将这些功能集中在一起，不要用多个函数/类修改某个文件。用且只用一个 service 完成这一需求。
 
 重点是要规避常见陷阱，比如，在无结构对象之间共享状态、使用可变数据类型，以及不确定副作用发生的位置。如果你能做到这点，你才可能笑到最后！
 
@@ -885,11 +884,13 @@ console.log(name);
 
 ### 避免副作用 (part2)
 
-在 JavaScript 中，原类型是值传递，对象、数组是引用传递。有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加操作的影响。这也许是好事，但也可能是坏事。让我们想象一个糟糕的情况:
+在 JavaScript 中，原类型是值传递，对象、数组是引用传递。
 
-用户点击“购买”按钮，该按钮调用购买函数，函数请求网络并将购物车数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始前不小心点击了某个不想要的项目上的“Add to Cart”按钮，该怎么办？如果发生这种情况，并且网络请求开始，那么purchase函数将发送意外添加的项，因为它引用了一个购物车数组，addItemToCart函数通过添加不需要的项修改了该数组。
+有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加操作的影响。想象一个糟糕的情况:
 
-一个很好的解决方案是addItemToCart总是克隆购物车、编辑并返回购物车的克隆。这确保引用购物车的其他函数不会受到任何更改的影响。
+用户点击“购买”按钮，该按钮调用购买函数，函数请求网络并将购物车数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始前，不小心点击了某个不想要的项目上的“Add to Cart”按钮，该怎么办？如果发生这种情况，并且网络请求开始，那么purchase函数将发送意外添加的项，因为它引用了一个购物车数组，addItemToCart函数通过添加不需要的项修改了该数组。
+
+一个很好的解决方案是addItemToCart总是克隆购物车，编辑并返回购物车的克隆。这确保引用购物车的其他函数不会受到任何更改的影响。
 
 注意两点:
 
@@ -1280,7 +1281,7 @@ function travelToTexas(vehicle: Vehicle) {
 
 ### 不要过度优化
 
-现代浏览器在运行时进行大量的底层优化。很多时候，你做的优化只是在浪费时间。这些优秀[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以帮助确定哪里需要优化，找到并修复它。
+现代浏览器在运行时进行大量的底层优化。很多时候，你做优化只是在浪费时间。这些优秀[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以帮助定位哪里需要优化，找到并修复它。
 
 **反例:**
 
@@ -1314,7 +1315,7 @@ for (let i = 0; i < list.length; i++) {
 
 ### 删除无用代码
 
-无用代码和重复代码一样无需保留。如果没有地方调用它，请删除！如果您仍然需要它，它会在您的版本历史等待着您。
+无用代码和重复代码一样无需保留。如果没有地方调用它，请删除！如果仍然需要它，可以查看版本历史。
 
 **反例:**
 
@@ -1356,10 +1357,10 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 **[⬆ 回到顶部](#目录)**
 
-### Use iterators and generators
+### 使用迭代器和生成器
 
 Use generators and iterables when working with collections of data used like a stream.  
-There are some good reasons:
+理由如下:
 
 - decouples the callee from the generator implementation in a sense that callee decides how many
 items to access
@@ -1367,7 +1368,7 @@ items to access
 - built-in support for iterating items using the `for-of` syntax
 - iterables allow to implement optimized iterator patterns
 
-**Bad:**
+**反例:**
 
 ```ts
 function fibonacci(n: number): number[] {
@@ -1390,7 +1391,7 @@ function print(n: number) {
 print(10);
 ```
 
-**Good:**
+**正例:**
 
 ```ts
 // Generates an infinite stream of Fibonacci numbers.
@@ -1445,25 +1446,11 @@ itiriri(fibonacci())
 
 TypeScript支持getter/setter语法。使用getter和setter从对象中访问数据可能比简单地在对象上查找属性要好。为什么？原因如下:
 
-* When you want to do more beyond getting an object property, you don't have to look up and change every accessor in your codebase.
-
 * 当您想要做更多的事情而不仅仅是获取对象属性时，您不必查找并更改代码中的每个访问器。*
-
-* Makes adding validation simple when doing a set.
-
-使在执行集合时添加验证变得简单。
-
-* Encapsulates the internal representation.
-
-封装内部表示。
-
-* Easy to add logging and error handling when getting and setting.
-
-更容易添加日志记录和错误处理。
-
-* You can lazy load your object's properties, let's say getting it from a server.
-
-您可以延迟加载对象的属性，比如从服务器获取它。
+* 使在执行集合时添加验证变得简单。*
+* 封装内部表示。*
+* 更容易添加日志和错误处理。*
+* 您可以延迟加载对象的属性，比如从服务器获取它。*
 
 **反例:**
 
@@ -1529,9 +1516,9 @@ account.balance = 100;
 
 **[⬆ 回到顶部](#目录)**
 
-### 让对象拥有private/protected成员
+### 让对象拥有 private/protected 成员
 
-TypeScript支持 `public` *(default)*, `protected` and `private` accessors on class members.  
+TypeScript 类成员支持 `public`*(默认)*、`protected` 以及 `private`的访问限制。
 
 **反例:**
 
@@ -1595,7 +1582,7 @@ class Circle {
 
 ### 不变性
 
-TypeScript 类型系统运行将接口、类上的单个属性设置为只读，能以函数的方式运行。
+TypeScript 类型系统允许将接口、类上的单个属性设置为只读，能以函数的方式运行。
 
 还有个高级场景，可以使用内置类型`Readonly`，它接受类型 T 并使用[映射类型](https://www.typescriptlang.org/docs/handbook/advanced-types.html#mapped-types)将其所有属性标记为只读。
 
@@ -1635,9 +1622,9 @@ interface Config {
 
 ### 类型 vs 接口
 
-当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，使用适合你的规则。
+当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，只有适合的规则。
 
-参考这个关于Typescript中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
+参考这个关于 Typescript 中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
 
 **反例:**
 
@@ -1716,7 +1703,7 @@ class Square implements Shape {
 
 ### 小、小、小！要事情说三遍
 
-类的大小是由它的职责来度量的。按照*单一职责原则*，类要尽量小。
+类的大小是由它的职责来度量的。按照*单一职责原则*，类要小。
 
 **反例:**
 
@@ -2124,8 +2111,7 @@ const query = new QueryBuilder()
 
 ### 单一职责原则 (SRP)
 
-正如 Clean Code 中所述，“类更改的原因不应该超过一个”。将很多功能打包在一个类看起来很诱人，就像在航班上您只能带一个手提箱。这样带来的问题是，在概念上类不具有内聚性，且有很多原因去修改类。而我们应该尽量减少修改类的次数。
-如果一个类中有很多的功能，修改了其中一处很难确定对代码库中其他依赖模块的影响。
+正如 Clean Code 中所述，“类更改的原因不应该超过一个”。将很多功能打包在一个类看起来很诱人，就像在航班上您只能带一个手提箱。这样带来的问题是，在概念上类不具有内聚性，且有很多原因去修改类。而我们应该尽量减少修改类的次数。如果一个类中有很多的功能，修改了其中一处很难确定对代码库中其他依赖模块的影响。
 
 **反例:**
 
@@ -3401,9 +3387,9 @@ Prefer using `camelCase` for variables, functions and class members.
 
 **[⬆ 回到顶部](#目录)**
 
-### 调用函数的函数和被调函数应放在较近的位置
+### 调用函数的函数和被调函数应靠近放置
 
-当函数间存在相互调用的情况时，应将两者置于较近的位置。理想情况下，应将调用其他函数的函数写在被调用函数的上方。我们倾向于从头到尾阅读代码，就像报纸一样。因此，让您的代码以这种方式读取。
+当函数间存在相互调用的情况时，应将两者靠近放置。最好是应将调用者写在被调者的上方。这就像读报纸一样，我们都是从上往下读，那么读代码也是。
 
 **反例:**
 
@@ -3533,13 +3519,13 @@ review.review();
 
 ### 组织导入
 
-使用干净且易于阅读的`import`语句，您可以快速查看当前代码的依赖关系。确保你对`import`语句采用以下良好的做法:
+使用整洁且易于阅读的`import`语句，您可以快速查看当前代码的依赖关系。导入语句应遵循以下做法:
 
-- Import语句应该按字母顺序排列和分组。
-- 应该删除未使用的导入。
+- `Import`语句应该按字母顺序排列和分组。
+- 应该删除未使用的导入语句。
 - 命名导入必须按字母顺序(例如：`import {A, B, C} from 'foo';`)。
 - 导入源必须在组中按字母顺序排列。 例如: `import * as foo from 'a'; import * as bar from 'b';`
-- 导入组由空白行划分。
+- 导入组用空行隔开。
 - 组内按照如下排序:
   - Polyfills (例如: `import 'reflect-metadata';`)
   - Node 内置模块 (例如: `import fs from 'fs';`)
@@ -3579,9 +3565,9 @@ import { ConfigPlugin } from './plugins/config/configPlugin';
 
 ### 使用 typescript 别名
 
-通过在`tsconfig.json`的编译器选项部分中定义路径和baseUrl属性来创建更漂亮的导入。
+为了创建整洁漂亮的导入语句，可以在`tsconfig.json`中设置编译器选项的`paths`和`baseUrl`属性。
 
-这将避免导入时使用较长的相对路径。
+这样可以避免导入时使用较长的相对路径。
 
 **反例:**
 
@@ -3614,12 +3600,11 @@ import { UserService } from '@services/UserService';
 
 ## 注释
 
-使用注释说明没有注释就无法表达。代码应该是真理的唯一来源。
+写注释意味着没有注释就无法表达清楚，而最好用代码去表达。
 
-> Don’t comment bad code—rewrite it.  
-> — *Brian W. Kernighan and P. J. Plaugher*
+> 不要注释坏代码，重写吧！— *Brian W. Kernighan and P. J. Plaugher*
 
-### 代码应该自解释而不是注释
+### 代码自解释而不是用注释
 
 代码即文档。
 
@@ -3683,9 +3668,9 @@ class User {
 
 **[⬆ 回到顶部](#目录)**
 
-### 不要日记式注释
+### 不要像写日记一样写注释
 
-记住，使用版本控制！不需要保留无用代码(dead code)、注释代码，尤其是日记式注释，使用git log来获取历史。
+记住，使用版本控制！不需要保留无用代码、注释掉的代码，尤其像日记一样的注释。使用`git log`来获取历史。
 
 **反例:**
 
@@ -3725,11 +3710,11 @@ function combine(a:number, b:number): number {
 
 **[⬆ 回到顶部](#目录)**
 
-### 避免位置标记
+### 避免使用注释标记位置
 
-它们常常扰乱代码。让代码结构化，函数和变量有合适的缩进和格式。
+它们常常扰乱代码。要让代码结构化，函数和变量要有合适的缩进和格式。
 
-作为一个可选项，你可以使用支持代码折叠的IDE (看下 Visual Studio Code [folding regions](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
+另外，你可以使用支持代码折叠的IDE (看下 Visual Studio Code [代码折叠](https://code.visualstudio.com/updates/v1_17#_folding-regions)).
 
 **反例:**
 
@@ -3826,9 +3811,9 @@ class Client {
 
 ### TODO 注释 
 
-当您发现自己需要在代码中留下注释以供以后进行改进时，使用`// TODO`注释。大多数IDE都对这类注释提供了特殊的支持你可以快速浏览整个待办事项列表。
+当发现自己需要在代码中留下注释，以提醒后续改进时，使用`// TODO`注释。大多数IDE都对这类注释提供了特殊的支持，你可以快速浏览整个`TODO`列表。
 
-但是请记住**TOD**注释并不是错误代码的借口。
+但是，请记住**TODO**注释并不是坏代码的借口。
 
 **反例:**
 
