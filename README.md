@@ -1,5 +1,5 @@
 # TypeScript 代码整洁之道
-本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译及精简。由于水平有限，如有错误烦请指明!
+将 Clean Code 的概念适用到 TypeScript，灵感来自 [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)。
 
 ## 目录
   1. [简介](#简介)
@@ -19,11 +19,11 @@
 
 ![Humorous image of software quality estimation as a count of how many expletives you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
-这不是 TypeScript 的编码规范，而是将 Robert C. Martin 的软件工程著作 [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) 适用到 TypeScript，指导如何使用 TypeScript 编写[易读、可复用和易重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
+这不是 TypeScript 的设计规范，而是将 Robert C. Martin 的软件工程著作 [《Clean Code》](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) 适用到 TypeScript，指导如何使用 TypeScript 编写[易读、可复用和易重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-并不是每个原则都要严格遵守，能被普遍认同的原则就更少了。虽然只是一些指导，但却是*Clean Code*作者对多年编码经验的总结及凝练。
+并不是每个原则都要严格遵守，能被广泛认同的原则就更少了。虽然只是一些指导，但却是*Clean Code*作者对多年编码经验的总结及凝练。
 
-软件工程技术已有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则来遵守。现在，让这些指导原则作为评估您和您的团队代码质量的试金石。
+软件工程技术已有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则要遵守。现在，让这些指导原则作为评估您和您的团队代码质量的试金石。
 
 另外，理解这些原则不会立即让您成为优秀的程序员，也不意味着工作多年不会犯错。每一段代码都是从不完美开始的，通过走查不断趋于完美，就像黏土制作成陶艺一样，享受这个过程吧!
 
@@ -1441,11 +1441,11 @@ itiriri(fibonacci())
 
 TypeScript 支持 getter/setter 语法。使用 getter 和 setter 从对象中访问数据比简单地在对象上查找属性要好。原因如下:
 
-* 当需要在获取对象属性之前做一些事情时，不必在代码中查找并修改每个访问器。*
-* 执行`set`时添加验证更简单。*
-* 封装内部表示。*
-* 更容易添加日志和错误处理。*
-* 可以延迟加载对象的属性，比如从服务器获取它。*
+* 当需要在获取对象属性之前做一些事情时，不必在代码中查找并修改每个访问器。
+* 执行`set`时添加验证更简单。
+* 封装内部表示。
+* 更容易添加日志和错误处理。
+* 可以延迟加载对象的属性，比如从服务器获取它。
 
 **反例:**
 
@@ -1617,7 +1617,7 @@ interface Config {
 
 ### 类型 vs 接口
 
-当您可能需要联合或交集时，请使用类型。如果需要`扩展`或`实现`，请使用接口。然而，没有严格的规则，只有适合的规则。
+当可能需要联合或交集时，请使用类型。如果需要`扩展`或`实现`，请使用接口。然而，没有严格的规则，只有适合的规则。
 
 详细解释参考关于 Typescript 中`type`和`interface`区别的[解答](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 。
 
@@ -2628,9 +2628,9 @@ class EconomicPrinter implements IPrinter {
 1. 高层模块不应该依赖于低层模块，两者都应该依赖于抽象。
 2. 抽象不依赖实现，实现应依赖抽象。
 
-一开始这难以理解，但是如果你使用过 Angular，你就会看以依赖注入(DI)的方式实现了这一原则。虽然它们不是相同的概念，但是 DIP 阻止高级模块了解其低级模块的细节并进行设置。它可以通过 DI 实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合非常糟糕，它使代码难以重构。
+一开始这难以理解，但是如果你使用过 Angular，你就会看到以依赖注入(DI)的方式实现了这一原则。虽然概念不同，但是 DIP 阻止高级模块了解其低级模块的细节并进行设置。它可以通过 DI 实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合非常糟糕，它让代码难以重构。
 
-DIP通常是通过使用控制反转(IoC)容器来实现的。比如：TypeScript 的 IoC 容器 [InversifyJs](https://www.npmjs.com/package/inversify)
+DIP 通常是通过使用控制反转(IoC)容器来实现的。比如：TypeScript 的 IoC 容器 [InversifyJs](https://www.npmjs.com/package/inversify)
 
 **反例:**
 
@@ -2784,7 +2784,7 @@ await report = await reader.read('report.json');
 
 ### 单一的测试每个概念
 
-测试也应该遵循*单一职责原则*。每个单元测试只做一个断言。
+测试也应该遵循*单一职责原则*，每个单元测试只做一个断言。
 
 **反例:**
 
@@ -2924,7 +2924,7 @@ describe('Calendar', () => {
 
 有些工具使用回调的方式将现有函数转换为 promise 对象：
 - Node.js 参见[`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original)
-- 通用参见[pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify)
+- 通用参见 [pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify)
 
 **反例:**
 
@@ -3008,7 +3008,7 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
 
 ```
 
-Promises 让代码更简洁，它有以下方法：
+Promise 提供了一些辅助方法，能让代码更简洁：
 
 | 方法                     | 描述                                       |  
 | ------------------------ | -----------------------------------------  |  
@@ -3018,7 +3018,7 @@ Promises 让代码更简洁，它有以下方法：
 | `Promise.race(promises)` | 返回一个新的 promise，传入数组中的**某个** promise 解决或拒绝，返回的 promise 就会解决或拒绝。|
 
 
-`Promise.all`在并行运行任务时尤其有用，`Promise.race`让为 Promises 更容易实现超时。
+`Promise.all`在并行运行任务时尤其有用，`Promise.race`让为 Promise 更容易实现超时。
 
 **[⬆ 回到顶部](#目录)**
 
