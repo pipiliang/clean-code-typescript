@@ -1,5 +1,5 @@
 # TypeScript 代码整洁之道
-本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译及精简。由于个人水平有限，如有存在错误之处烦请指明!
+本项目是对[clean-code-typescript](https://github.com/labs42io/clean-code-typescript)项目的翻译及精简。由于水平有限，如有错误烦请指明!
 
 ## 目录
   1. [简介](#简介)
@@ -886,11 +886,11 @@ console.log(name);
 
 在 JavaScript 中，原类型是值传递，对象、数组是引用传递。
 
-有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该购物车数组的任何其他函数都将受到此添加操作的影响。想象一个糟糕的情况:
+有这样一种情况，如果您的函数修改了购物车数组，例如，要添加购买的商品，那么使用该`cart`数组的任何其他函数都将受到此添加操作的影响。想象一个糟糕的情况:
 
-用户点击“购买”按钮，该按钮调用购买函数，函数请求网络并将购物车数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始前，不小心点击了某个不想要的项目上的“Add to Cart”按钮，该怎么办？如果发生这种情况，并且网络请求开始，那么purchase函数将发送意外添加的项，因为它引用了一个购物车数组，addItemToCart函数通过添加不需要的项修改了该数组。
+用户点击“购买”按钮，该按钮调用`purchase`函数，函数请求网络并将`cart`数组发送到服务器。由于网络连接不好，购买功能必须不断重试请求。现在，如果用户在网络请求开始前，不小心点击了某个不想要的项目上的“Add to Cart”按钮，该怎么办？如果发生这种情况，并且网络请求开始，那么`purchase` 函数将发送意外添加的项，因为它引用了一个购物车数组，`addItemToCart`函数通过添加不需要的项修改了该数组。
 
-一个很好的解决方案是addItemToCart总是克隆购物车，编辑并返回购物车的克隆。这确保引用购物车的其他函数不会受到任何更改的影响。
+一个很好的解决方案是`addItemToCart`总是克隆`cart`，编辑它，并返回克隆。这确保引用购物车的其他函数不会受到任何更改的影响。
 
 注意两点:
 
@@ -929,7 +929,7 @@ function addItemToCart(cart: CartItem[], item:Item):CartItem[] {
 
 在 JavaScript 中污染全局是一个非常不好的实践，这么做可能和其他库起冲突，且调用你的 API 的用户在实际环境中得到一个 exception 前对这一情况是一无所知的。
 
-考虑这样一个例子：如果您想要扩展 JavaScript 的 `Array`，使其拥有一个可以显示两个数组之间差异的 diff 方法，该怎么做呢？可以将新函数写入`Array.prototype` ，但它可能与另一个尝试做同样事情的库冲突。如果另一个库只是使用`diff`来查找数组的第一个元素和最后一个元素之间的区别呢？
+考虑这样一个例子：如果想要扩展 JavaScript 的 `Array`，使其拥有一个可以显示两个数组之间差异的 `diff`方法，该怎么做呢？可以将新函数写入`Array.prototype` ，但它可能与另一个尝试做同样事情的库冲突。如果另一个库只是使用`diff`来查找数组的第一个元素和最后一个元素之间的区别呢？
 
 更好的做法是扩展`Array`，实现对应的函数功能。
 
@@ -1147,9 +1147,7 @@ if (!isEmailUsed(node)) {
 
 ### 避免判断条件
 
-这看起来似乎不太可能完成啊。
-大多数人听到后第一反应是，“没有if语句怎么实现功能呢？”在多数情况下，可以使用多态性来实现相同的功能。
-接下来的问题是“为什么要这么做？”原因就是之前提到的：函数只做一件事。
+这看起来似乎不太可能完成啊。大多数人听到后第一反应是，“没有if语句怎么实现功能呢？” 在多数情况下，可以使用多态性来实现相同的功能。接下来的问题是 “为什么要这么做？” 原因就是之前提到的：函数只做一件事。
 
 **反例:**
 
@@ -1281,7 +1279,7 @@ function travelToTexas(vehicle: Vehicle) {
 
 ### 不要过度优化
 
-现代浏览器在运行时进行大量的底层优化。很多时候，你做优化只是在浪费时间。这些优秀[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以帮助定位哪里需要优化，找到并修复它。
+现代浏览器在运行时进行大量的底层优化。很多时候，你做优化只是在浪费时间。有些优秀[资源](https://github.com/petkaantonov/bluebird/wiki/Optimization-killers)可以帮助定位哪里需要优化，找到并修复它。
 
 **反例:**
 
@@ -1359,14 +1357,13 @@ inventoryTracker('apples', req, 'www.inventory-awesome.io');
 
 ### 使用迭代器和生成器
 
-Use generators and iterables when working with collections of data used like a stream.  
-理由如下:
+像使用流一样处理数据集合时，请使用生成器和迭代器。
 
-- decouples the callee from the generator implementation in a sense that callee decides how many
-items to access
-- lazy execution, items are streamed on demand
-- built-in support for iterating items using the `for-of` syntax
-- iterables allow to implement optimized iterator patterns
+理由如下:
+- 将调用者与生成器实现解耦，在某种意义上，调用者决定要访问多少项。
+- 延迟执行，按需使用。
+- 内置支持使用`for-of`语法进行迭代
+- 允许实现优化的迭代器模式
 
 **反例:**
 
@@ -1417,9 +1414,7 @@ function print(n: number) {
 print(10);
 ```
 
-There are libraries that allow working with iterables in a similar way as with native arrays, by
-chaining methods like `map`, `slice`, `forEach` etc. See [itiriri](https://www.npmjs.com/package/itiriri) for
-an example of advanced manipulation with iterables (or [itiriri-async](https://www.npmjs.com/package/itiriri-async) for manipulation of async iterables).
+有些库通过链接“map”、“slice”、“forEach”等方法，达到与原生数组类似的方式处理迭代。参见 [itiriri](https://www.npmjs.com/package/itiriri) 里面有一些使用迭代器的高级操作示例（或异步迭代的操作 [itiriri-async](https://www.npmjs.com/package/itiriri-async)）。
 
 ```ts
 import itiriri from 'itiriri';
@@ -1444,13 +1439,13 @@ itiriri(fibonacci())
 
 ### 使用`getters`和`setters`
 
-TypeScript支持getter/setter语法。使用getter和setter从对象中访问数据可能比简单地在对象上查找属性要好。为什么？原因如下:
+TypeScript 支持 getter/setter 语法。使用 getter 和 setter 从对象中访问数据比简单地在对象上查找属性要好。原因如下:
 
-* 当您想要做更多的事情而不仅仅是获取对象属性时，您不必查找并更改代码中的每个访问器。*
-* 使在执行集合时添加验证变得简单。*
+* 当需要在获取对象属性之前做一些事情时，不必在代码中查找并修改每个访问器。*
+* 执行`set`时添加验证更简单。*
 * 封装内部表示。*
 * 更容易添加日志和错误处理。*
-* 您可以延迟加载对象的属性，比如从服务器获取它。*
+* 可以延迟加载对象的属性，比如从服务器获取它。*
 
 **反例:**
 
@@ -1622,9 +1617,9 @@ interface Config {
 
 ### 类型 vs 接口
 
-当您可能需要联合或交集时，请使用类型。如果需要扩展或实现，请使用接口。然而，没有严格的规则，只有适合的规则。
+当您可能需要联合或交集时，请使用类型。如果需要`扩展`或`实现`，请使用接口。然而，没有严格的规则，只有适合的规则。
 
-参考这个关于 Typescript 中`type`和`interface`区别的[解释](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 
+详细解释参考关于 Typescript 中`type`和`interface`区别的[解答](https://stackoverflow.com/questions/37233735/typescript-interfaces-vs-types/54101543#54101543) 。
 
 **反例:**
 
@@ -1887,13 +1882,13 @@ class UserNotifier {
 
 ### 组合大于继承
 
-正如”四人帮“在[设计模式](https://en.wikipedia.org/wiki/Design_Patterns)中所指出的那样，您尽可能使用组合而不是继承。组合和继承各有优劣。这个准则的主要观点是，如果你潜意识地倾向于继承，试着想想组合是否能更好地给你的问题建模，在某些情况下可以。  
+正如“四人帮”在[设计模式](https://en.wikipedia.org/wiki/Design_Patterns)中所指出的那样，您尽可能使用组合而不是继承。组合和继承各有优劣。这个准则的主要观点是，如果你潜意识地倾向于继承，试着想想组合是否能更好地给你的问题建模，在某些情况下可以。  
 
-什么时候应该使用继承？这取决于你手头的问题。以下场景使用继承比组合更好:
+什么时候应该使用继承？这取决于你面临的问题。以下场景使用继承更好:
 
-1. 继承代表的是“is-a”关系，而不是“has-a”关系 (人 -> 动物 vs. 用户 -> 用户详情)
+1. 继承代表的是“is-a”关系，而不是“has-a”关系 (人 -> 动物 vs. 用户 -> 用户详情)。
 2. 可复用基类的代码 (人类可以像所有动物一样移动)。
-3. 希望通过更改基类对派生类进行全局更改。(改变所有动物在运动时的热量消耗)。
+3. 希望通过更改基类对派生类进行全局更改(改变所有动物在运动时的热量消耗)。
 
 **反例:**
 
@@ -1985,7 +1980,7 @@ class EmployeeTaxData {
 
 ### 使用方法链
 
-这个模式非常有用，在许多库中都可以看到。它让代码表达性更好，且不那么冗长，看起来更整洁。
+非常有用的模式，在许多库中都可以看到。它让代码表达力更好，也更简洁。
 
 **反例:**
 
@@ -2111,7 +2106,7 @@ const query = new QueryBuilder()
 
 ### 单一职责原则 (SRP)
 
-正如 Clean Code 中所述，“类更改的原因不应该超过一个”。将很多功能打包在一个类看起来很诱人，就像在航班上您只能带一个手提箱。这样带来的问题是，在概念上类不具有内聚性，且有很多原因去修改类。而我们应该尽量减少修改类的次数。如果一个类中有很多的功能，修改了其中一处很难确定对代码库中其他依赖模块的影响。
+正如 Clean Code 中所述，“类更改的原因不应该超过一个”。将很多功能打包在一个类看起来很诱人，就像在航班上您只能带一个手提箱。这样带来的问题是，在概念上类不具有内聚性，且有很多原因去修改类。而我们应该尽量减少修改类的次数。如果一个类功能太多，修改了其中一处很难确定对代码库中其他依赖模块的影响。
 
 **反例:**
 
@@ -2328,9 +2323,10 @@ class HttpRequester {
 ### 里氏替换原则 (LSP)
 
 对一个非常简单的概念来说，这是个可怕的术语。
-它的正式定义是：“如果 S 是 T 的一个子类型，那么类型 T 的对象可以被替换为类型 S 的对象，而不会改变程序的任何期望属性(正确性、执行的任务等)“。这是一个更可怕的定义。  
 
-对此最好的解释是，如果您有一个父类和一个子类，那么父类和子类可以互换使用，而不会得到不正确的结果。这可能仍然令人困惑，所以让我们看一看经典的正方形矩形的例子。从数学上讲，正方形是矩形，但是如果您通过继承使用 “is-a” 关系对其建模，您很快就会遇到麻烦。
+它的正式定义是：“如果 S 是 T 的一个子类型，那么类型 T 的对象可以被替换为类型 S 的对象，而不会改变程序任何期望的属性(正确性、执行的任务等)“。这是一个更可怕的定义。  
+
+更好的解释是，如果您有一个父类和一个子类，那么父类和子类可以互换使用，而不会出现问题。这可能仍然令人困惑，所以让我们看一看经典的正方形矩形的例子。从数学上讲，正方形是矩形，但是如果您通过继承使用 “is-a” 关系对其建模，您很快就会遇到麻烦。
 
 **反例:**
 
@@ -2500,7 +2496,7 @@ renderLargeShapes(shapes);
 
 ### 接口隔离原则 (ISP)
 
-ISP 声明“客户不应该被迫依赖于他们不使用的接口。”这一原则与单一责任原则密切相关。否则会增加客户端的负担，因为他们需要实现一些不需要的方法。
+“客户不应该被迫依赖于他们不使用的接口。” 这一原则与单一责任原则密切相关。这意味着不应该设计一个大而全的抽象，否则会增加客户的负担，因为他们需要实现一些不需要的方法。
 
 **反例:**
 
@@ -2628,13 +2624,13 @@ class EconomicPrinter implements IPrinter {
 
 ### 依赖反转原则(Dependency Inversion Principle)
 
-这一原则有两个要点:
-1. 高层模块不应该依赖于低层模块，两者都应该依赖于接口。
-2. 接口应该脱离实现，实现应该依赖接口。
+这个原则有两个要点:
+1. 高层模块不应该依赖于低层模块，两者都应该依赖于抽象。
+2. 抽象不依赖实现，实现应依赖抽象。
 
-一开始这难以理解，但是如果你使用过 Angular，你就会看以依赖注入(DI)的方式实现了这一原则。虽然它们不是相同的概念，但是 DIP 阻止高级模块了解其低级模块的细节并进行设置。它可以通过 DI 实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合是一种非常糟糕的开发模式，它使代码难以重构。
+一开始这难以理解，但是如果你使用过 Angular，你就会看以依赖注入(DI)的方式实现了这一原则。虽然它们不是相同的概念，但是 DIP 阻止高级模块了解其低级模块的细节并进行设置。它可以通过 DI 实现这一点。这样做的一个巨大好处是减少了模块之间的耦合。耦合非常糟糕，它使代码难以重构。
 
-DIP通常是通过使用控制反转(IoC)容器来实现的。比如：TypeScript 的IoC容器 [InversifyJs](https://www.npmjs.com/package/inversify)
+DIP通常是通过使用控制反转(IoC)容器来实现的。比如：TypeScript 的 IoC 容器 [InversifyJs](https://www.npmjs.com/package/inversify)
 
 **反例:**
 
@@ -2764,9 +2760,9 @@ await report = await reader.read('report.json');
 
 ## 测试
 
-测试比发货更重要。如果没有测试或数量不足，那么每次发布代码时都无法确保不引入问题。怎样才算是足够的测试数量？这取决于团队，但是拥有100%的覆盖率(所有语句和分支)会团队更有信心。这一切都要有好的测试框架以及覆盖率工具。
+测试比发货更重要。如果没有测试或数量不足，那么每次发布代码时都无法确保不引入问题。怎样才算是足够的测试？这取决于团队，但是拥有100%的覆盖率(所有语句和分支)会让团队更有信心。这一切都要基于好的测试框架以及[覆盖率工具](https://github.com/gotwarlost/istanbul)。
 
-没有任何理由不编写测试。有很多优秀的JS测试框架都支持TypeScript，找一个你的团队喜欢的。然后总是为你引入的每个新特性/模块编写测试。如果您喜欢测试驱动开发(TDD)，那就太好了，重点是确保在开发任何特性或重构现有特性之前，代码已经达到了覆盖目标。 
+没有任何理由不编写测试。有[很多优秀的 JS 测试框架](http://jstherightway.org/#testing-tools)都支持 TypeScript，找个团队喜欢的。然后为每个新特性/模块编写测试。如果您喜欢测试驱动开发(TDD)，那就太好了，重点是确保在开发任何特性或重构现有特性之前，代码覆盖率已经达到要求。 
 
 ### TDD（测试驱动开发）三定律
 
@@ -2872,7 +2868,7 @@ describe('AwesomeDate', () => {
 
 ### 测试用例名称应该显示它的意图
 
-当测试失败时，它的名称就能告诉你原因。
+当测试失败时，出错的第一个迹象可能就是它的名字。
 
 **反例:**
 
@@ -2926,7 +2922,7 @@ describe('Calendar', () => {
 
 回调不够整洁而且会导致过多的嵌套*(回调地狱)*。
 
-有些工具可以将现有函数转换为promise对象：
+有些工具使用回调的方式将现有函数转换为 promise 对象：
 - Node.js 参见[`util.promisify`](https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original)
 - 通用参见[pify](https://www.npmjs.com/package/pify), [es6-promisify](https://www.npmjs.com/package/es6-promisify)
 
@@ -3012,23 +3008,23 @@ downloadPage('https://en.wikipedia.org/wiki/Robert_Cecil_Martin', 'article.html'
 
 ```
 
-Promises 有以下方法：
+Promises 让代码更简洁，它有以下方法：
 
 | 方法                     | 描述                                       |  
 | ------------------------ | -----------------------------------------  |  
-| `Promise.resolve(value)` | Convert a value into a resolved promise.   |  
-| `Promise.reject(error)`  | Convert an error into a rejected promise.  |  
-| `Promise.all(promises)`  | Returns a new promise which is fulfilled with an array of fulfillment values for the passed promises or rejects with the reason of the first promise that rejects. |
-| `Promise.race(promises)`|Returns a new promise which is fulfilled/rejected with the result/error of the first settled promise from the array of passed promises. |
+| `Promise.resolve(value)` | 返回一个传入值解析后的 promise 。   |  
+| `Promise.reject(error)`  | 返回一个带有拒绝原因的 promise 。   |  
+| `Promise.all(promises)`  | 返回一个新的 promise，传入数组中的**每个** promise 都执行完成后返回的 promise 才算完成，或第一个 promise 拒绝而拒绝。|
+| `Promise.race(promises)` | 返回一个新的 promise，传入数组中的**某个** promise 解决或拒绝，返回的 promise 就会解决或拒绝。|
 
 
-`Promise.all`在并行运行任务时尤其有用，`Promise.race`让为 Promises 实现超时变得更加容易。
+`Promise.all`在并行运行任务时尤其有用，`Promise.race`让为 Promises 更容易实现超时。
 
 **[⬆ 回到顶部](#目录)**
 
 ### `Async/Await` 比 `Promises` 更好
 
-使用async/wait语法，您可以编写更简洁、更容易理解的链式promise的代码。在一个以async关键字为前缀的函数中，您可以告诉JavaScript运行时暂停wait关键字上的代码执行(当使用 promise 时)。
+使用`async`/`await`语法，可以编写更简洁、更易理解的链式 promise 的代码。一个函数使用`async`关键字作为前缀，JavaScript 运行时会暂停`await`关键字上的代码执行(当使用 promise 时)。
 
 **反例:**
 
@@ -3098,12 +3094,13 @@ try {
 
 ## 错误处理
 
-抛出错误是件好事!它们意味着运行时已经成功地识别出程序中的错误，并通过停止当前堆栈上的函数执行(在Node.js)终止进程以及在控制台中使用堆栈跟踪通知您来让您知道。
+抛出错误是件好事！它表示着运行时已经成功识别出程序中的错误，通过停止当前堆栈上的函数执行，终止进程(在Node.js)，以及在控制台中打印堆栈信息来让你知晓。
 
-### 抛出`Error`或 reject `Error`
+### 抛出`Error`或 使用`reject`
 
-JavaScript和TypeScript允许你 `throw` 任何对象。Promise也可以用任何理由对象拒绝。
-建议使用带有 `Error` 类型的 `throw` 语法。这是因为您的错误可能在具有 `catch` 语法的高级代码中被捕获。在那里捕获字符串消息会非常混乱，并且会使[调试更加痛苦](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error)。出于同样的原因，您应该拒绝带有 `Error `类型的 promises。
+JavaScript 和 TypeScript 允许你 `throw` 任何对象。Promise 也可以用任何理由对象拒绝。
+
+建议使用 `Error` 类型的 `throw` 语法。因为你的错误可能在写有 `catch`语法的高级代码中被捕获。在那里捕获字符串消息显得非常混乱，并且会使[调试更加痛苦](https://basarat.gitbooks.io/typescript/docs/types/exceptions.html#always-use-error)。出于同样的原因，也应该在拒绝 promise 时使用 `Error `类型。
 
 **反例:**
 
@@ -3149,9 +3146,9 @@ async function get(): Promise<Item[]> {
 
 ```
 
-使用 `Error` 类型的好处是 `try/catch/finally` 语法支持它，并且隐式地所有错误都具有  `stack` 属性，该属性对于调试非常强大。
+使用 `Error` 类型的好处是 `try/catch/finally` 语法支持它，并且隐式地所有错误都具有  `stack` 属性，该属性对于调试非常有用。
 
-还有另一种选择，即不使用 `throw` 语法，而总是返回自定义错误对象。TypeScript在这块更容易。考虑下面的例子:
+另外，即使不用 `throw` 语法而是返回自定义错误对象，TypeScript在这块更容易。考虑下面的例子:
 
 ```ts
 
@@ -3185,13 +3182,13 @@ function calculateTotal(items: Item[]): Failable<number, 'empty'> {
 
 ```
 
-关于这个想法的详细解释，请参考[原文](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9)。
+详细解释请参考[原文](https://medium.com/@dhruvrajvanshi/making-exceptions-type-safe-in-typescript-c4d200ee78e9)。
 
 **[⬆ 回到顶部](#目录)**
 
 ### 别忘了捕获错误
 
-对捕获的错误不做任何处理并不会使您能够修复或对所述错误作出反应。将错误记录到控制台(console.log)也好不到哪里去，因为它常常会在打印到控制台的大量内容中丢失。如果您在     `try/catch` 中包装任何代码，这意味着您认为那里可能会发生错误，因此您应该有一个计划，或创建一个代码路径，以便在发生错误时使用。
+捕获错误而不处理实际上也是没有修复错误，将错误记录到控制台(console.log）也好不到哪里去，因为它常常丢失在控制台大量的日志之中。如果将代码写在`try/catch` 中，说明那里可能会发生错误，因此应该考虑在错误发生时做一些处理。
 
 **反例:**
 
@@ -3305,37 +3302,29 @@ try {
 
 ## 格式化
 
-Formatting is subjective. Like many rules herein, there is no hard and fast rule that you must follow. The main point is *DO NOT ARGUE* over formatting. There are tons of tools to automate this. Use one! It's a waste of time and money for engineers to argue over formatting. The general rule to follow is *keep consistent formatting rules*.  
+就像这里的许多规则一样，没有什么是硬性规定，格式化也是。重点是**不要争论**格式，使用自动化工具实现格式化。对于工程师来说，争论格式就是浪费时间和金钱。通用的原则是*保持一致的格式规则*。
 
-格式化是主观的。就像这里的许多规则一样，没有什么硬性规定是你必须遵守的。重点是不要争论格式。有很多工具可以实现自动化。使用一个! 对于工程师来说，争论格式是浪费时间和金钱的。遵循的一般规则是保持一致的格式规则。
+对于 TypeScript ，有一个强大的工具叫做 TSLint。它是一个静态分析工具，可以帮助您显著提高代码的可读性和可维护性。项目中使用可以参考以下 TSLint 配置:
 
-For TypeScript there is a powerful tool called [TSLint](https://palantir.github.io/tslint/). It's a static analysis tool that can help you improve dramatically the readability and maintainability of your code. There are ready to use TSLint configurations that you can reference in your projects:
+* [TSLint Config Standard](https://www.npmjs.com/package/tslint-config-standard) - 标准格式规则
 
-对于TypeScript，有一个强大的工具叫做TSLint。它是一个静态分析工具，可以帮助您显著提高代码的可读性和可维护性。已经准备好使用TSLint配置，您可以在您的项目中参考:
+* [TSLint Config Airbnb](https://www.npmjs.com/package/tslint-config-airbnb) - Airbnb 格式规则
 
-* [TSLint Config Standard](https://www.npmjs.com/package/tslint-config-standard) - standard style rules
+* [TSLint Clean Code](https://www.npmjs.com/package/tslint-clean-code) - 灵感来自于[Clean Code: A Handbook of Agile Software Craftsmanship](https://www.amazon.ca/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) 的 TSLint 规则。
 
-* [TSLint Config Airbnb](https://www.npmjs.com/package/tslint-config-airbnb) - Airbnb style guide
+* [TSLint react](https://www.npmjs.com/package/tslint-react) - React 相关的Lint规则
 
-* [TSLint Clean Code](https://www.npmjs.com/package/tslint-clean-code) - TSLint rules inspired be the [Clean Code: A Handbook of Agile Software Craftsmanship](https://www.amazon.ca/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
+* [TSLint + Prettier](https://www.npmjs.com/package/tslint-config-prettier) - [Prettier](https://github.com/prettier/prettier) 代码格式化相关的 lint 规则
 
-* [TSLint react](https://www.npmjs.com/package/tslint-react) - lint rules related to React & JSX
+* [ESLint rules for TSLint](https://www.npmjs.com/package/tslint-eslint-rules) - TypeScript 的 ESLint
 
-* [TSLint + Prettier](https://www.npmjs.com/package/tslint-config-prettier) - lint rules for [Prettier](https://github.com/prettier/prettier) code formatter
+* [Immutable](https://www.npmjs.com/package/tslint-immutable) - 在 TypeScript 中禁用 mutation 的规则
 
-* [ESLint rules for TSLint](https://www.npmjs.com/package/tslint-eslint-rules) - ESLint rules for TypeScript
-
-* [Immutable](https://www.npmjs.com/package/tslint-immutable) - rules to disable mutation in TypeScript
-
-Refer also to this great [TypeScript StyleGuide and Coding Conventions](https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html) source.
-
-还可以参考这个很棒的[TypeScript风格指南和编码约定](https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html)的源代码。
+还可以参考[TypeScript 风格指南和编码约定](https://basarat.gitbooks.io/typescript/docs/styleguide/styleguide.html)的源代码。
 
 ### 大小写一致
 
-Capitalization tells you a lot about your variables, functions, etc. These rules are subjective, so your team can choose whatever they want. The point is, no matter what you all choose, just *be consistent*.
-
-大写可以告诉你很多关于变量、函数等的信息。这些规则是主观的，所以你的团队可以选择他们想要的任何东西。关键是，无论你们选择什么，都要*一致*。
+大写可以告诉你很多关于变量、函数等的信息。这些都是主观规则，由你的团队做选择。关键是无论怎么选，都要*一致*。
 
 **反例:**
 
@@ -3381,9 +3370,9 @@ class Container {}
 
 ```
 
-Prefer using `PascalCase` for class, interface, type and namespace names.  
+类名、接口名、类型名和命名空间名最好使用“帕斯卡命名”。
 
-Prefer using `camelCase` for variables, functions and class members.
+变量、函数和类成员使用“驼峰式命名”。
 
 **[⬆ 回到顶部](#目录)**
 
