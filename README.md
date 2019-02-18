@@ -1,6 +1,8 @@
 # TypeScript 代码整洁之道
 将 Clean Code 的概念适用到 TypeScript，灵感来自 [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)。
 
+>本项目翻译自 [clean-code-typescript](https://github.com/labs42io/clean-code-typescript)，由于水平有限，翻译错误之处烦请指明！
+
 ## 目录
   1. [简介](#简介)
   2. [变量](#变量)
