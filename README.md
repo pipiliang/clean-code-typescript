@@ -1,7 +1,7 @@
 # TypeScript 代码整洁之道
-将 Clean Code 的概念适用到 TypeScript，灵感来自 [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)。
+>本项目翻译自 [labs42io/clean-code-typescript](https://github.com/labs42io/clean-code-typescript)，由于译者水平有限，错误之处烦请指明！
 
->本项目翻译自 [clean-code-typescript](https://github.com/labs42io/clean-code-typescript)，由于水平有限，翻译错误之处烦请指明！
+将 Clean Code 的概念适用到 TypeScript，灵感来自 [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)。
 
 ## 目录
   1. [简介](#简介)
@@ -21,9 +21,9 @@
 
 ![Humorous image of software quality estimation as a count of how many expletives you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
-这不是 TypeScript 的设计规范，而是将 Robert C. Martin 的软件工程著作 [《Clean Code》](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) 适用到 TypeScript，指导如何使用 TypeScript 编写[易读、可复用和易重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
+这不是一份 TypeScript 设计规范，而是将 Robert C. Martin 的软件工程著作 [《Clean Code》](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) 适用到 TypeScript，指导读者使用 TypeScript 编写[易读、可复用和易重构](https://github.com/ryanmcdermott/3rs-of-software-architecture)的软件。
 
-并不是每个原则都要严格遵守，能被广泛认同的原则就更少了。虽然只是一些指导，但却是*Clean Code*作者对多年编码经验的总结及凝练。
+并不是每个原则都要严格遵守，被广泛认同的就更少了。虽然这只是一份指导原则，但却是*Clean Code* 作者对多年编程经验的凝练。
 
 软件工程技术已有50多年的历史了，我们仍然要学习很多的东西。当软件架构和架构本身一样古老的时候，也许我们会有更严格的规则要遵守。现在，让这些指导原则作为评估您和您的团队代码质量的试金石。
 
